@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./components/app/app.jsx";
+import App from './components/app/app.jsx';
+import {COUNT_PLACES, generatePlaces} from './utils/mocks';
 
-const RentalOffer = {
-  COUNT: 312,
-};
+const places = generatePlaces();
 
 ReactDOM.render(
-    <App countRentalOffer={RentalOffer.COUNT} />,
+    <App
+      countPlaces={COUNT_PLACES}
+      places={places}
+    />,
     document.getElementById(`root`)
 );
