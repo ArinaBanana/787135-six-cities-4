@@ -312,6 +312,7 @@ exports[`Should render Main Screen 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"
@@ -414,6 +415,7 @@ exports[`Should render Main Screen 1`] = `
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[Function]}
                 >
                   <a
                     href="#"

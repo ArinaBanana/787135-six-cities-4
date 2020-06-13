@@ -8,7 +8,7 @@ const places = [
 ];
 
 it(`Should render Main Screen`, () => {
-  const tree = renderer.create(<MainScreen countPlaces={6758} places={places} />).toJSON();
+  const tree = renderer.create(<MainScreen countPlaces={6758} places={places} onTitleClick={()=> {}} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

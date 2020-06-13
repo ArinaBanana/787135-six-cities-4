@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from "../place-card/place-card.jsx";
 
-const MainScreen = ({countPlaces, places}) => {
+const MainScreen = ({countPlaces, places, onTitleClick}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -87,7 +87,12 @@ const MainScreen = ({countPlaces, places}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => <PlaceCard key={place.id} price={place.price} title={place.title} />)}
+                {places.map((place) => <PlaceCard
+                  key={place.id}
+                  price={place.price}
+                  title={place.title}
+                  id={place.id}
+                  onTitleClick={onTitleClick} />)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -107,7 +112,8 @@ MainScreen.propTypes = {
   places: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-  }))
+  })),
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default MainScreen;

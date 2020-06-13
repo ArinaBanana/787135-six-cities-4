@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MainScreen from "../main-screen/main-screen.jsx";
 
+const titlePlaceHandler = (id) => {
+  return id;
+};
+
 const App = ({countPlaces, places}) => {
   return (
     <MainScreen
       countPlaces={countPlaces}
       places={places}
+      onTitleClick={titlePlaceHandler}
     />
   );
 };
