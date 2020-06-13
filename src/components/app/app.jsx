@@ -2,16 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MainScreen from "../main-screen/main-screen.jsx";
 
-const App = (props) => {
-  const {countRentalOffer} = props;
-
+const App = ({countPlaces, places}) => {
   return (
-    <MainScreen countRentalOffer={countRentalOffer} />
+    <MainScreen
+      countPlaces={countPlaces}
+      places={places}
+    />
   );
 };
 
 App.propTypes = {
-  countRentalOffer: PropTypes.number.isRequired,
+  countPlaces: PropTypes.number.isRequired,
+  places: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }))
 };
 
 export default App;
