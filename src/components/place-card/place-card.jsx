@@ -9,7 +9,8 @@ class PlaceCard extends PureComponent {
   }
 
   render() {
-    let {title, price} = this.props;
+    const {place} = this.props;
+
     return (
       <article className="cities__place-card place-card">
         <div className="place-card__mark">
@@ -23,7 +24,7 @@ class PlaceCard extends PureComponent {
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
-              <b className="place-card__price-value">&euro;{price}</b>
+              <b className="place-card__price-value">&euro;{place.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button className="place-card__bookmark-button button" type="button">
@@ -40,7 +41,7 @@ class PlaceCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name" onClick={this.handleClick}>
-            <a href="#">{title}</a>
+            <a href="#">{place.title}</a>
           </h2>
           <p className="place-card__type">Apartment</p>
         </div>
@@ -49,15 +50,19 @@ class PlaceCard extends PureComponent {
   }
 
   handleClick() {
-    return this.props.onTitleClick(this.props.id);
+    const {onTitleClick, place} = this.props;
+
+    return onTitleClick(place.id);
   }
 }
 
 PlaceCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
   onTitleClick: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired
+  place: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+  })
 };
 
 export default PlaceCard;
