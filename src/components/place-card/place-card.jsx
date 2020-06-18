@@ -46,7 +46,7 @@ class PlaceCard extends PureComponent {
           <h2 className="place-card__name" onClick={this.handleClick}>
             <a href="#">{place.title}</a>
           </h2>
-          <p className="place-card__type">Apartment</p>
+          <p className="place-card__type">{place.type}</p>
         </div>
       </article>
     );
