@@ -27,6 +27,11 @@ const generatePlace = () => {
     id: getNextId(),
     title: getRandomArrayItem(titles),
     price: getRandomArrayItem(prices),
+    img: `path`,
+    type: `Apartment`,
+    rating: `80%`,
+    premium: false,
+    isBookmark: false
   };
 };
 
