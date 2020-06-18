@@ -1,7 +1,7 @@
-import {getRandomArrayItem} from "./func";
+import {getRandomArrayItem} from "../utils/func";
 
 const COUNT_PLACES = 312;
-const COUNT_SHOWED_PLACES = 5;
+const COUNT_SHOWED_PLACES = 4;
 
 const titles = [
   `Beautiful camp, luxurious apartment at great location`,
