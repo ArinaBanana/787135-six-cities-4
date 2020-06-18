@@ -12,17 +12,19 @@ const titles = [
 
 const prices = [80, 120, 132, 180];
 
-let count = 0;
+const makeIdGenerator = () => {
+  let counter = 0;
 
-const generateId = () => {
-  count += 1;
-
-  return count;
+  return () => {
+    return counter++;
+  };
 };
+
+const getNextId = makeIdGenerator();
 
 const generatePlace = () => {
   return {
-    id: generateId(),
+    id: getNextId(),
     title: getRandomArrayItem(titles),
     price: getRandomArrayItem(prices),
   };
