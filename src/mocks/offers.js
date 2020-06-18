@@ -43,8 +43,8 @@ const generatePlace = () => {
     price: getRandomArrayItem(prices),
     img: getRandomArrayItem(imageSource),
     type: getRandomArrayItem(types),
-    rating: `${getRandomNumber(0, 100)}%`,
-    premium: getRandomBoolean(),
+    rating: `${getRandomNumber(50, 100)}%`,
+    isPremium: getRandomBoolean(),
     isBookmark: getRandomBoolean()
   };
 };
