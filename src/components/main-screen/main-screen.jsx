@@ -76,7 +76,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                 <span className="places__sorting-type" tabIndex="0">
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -87,12 +87,14 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => <PlaceCard
-                  key={place.id}
-                  price={place.price}
-                  title={place.title}
-                  id={place.id}
-                  onTitleClick={onTitleClick} />)}
+                {
+                  places.map((place) => <PlaceCard
+                    key={place.id}
+                    price={place.price}
+                    title={place.title}
+                    id={place.id}
+                    onTitleClick={onTitleClick}/>)
+                }
               </div>
             </section>
             <div className="cities__right-section">
