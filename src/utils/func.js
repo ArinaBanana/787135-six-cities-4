@@ -8,4 +8,8 @@ const getRandomArrayItem = (array) => {
   return array[randomIndex];
 };
 
-export {getRandomArrayItem};
+const getRandomBoolean = () => {
+  return Boolean(getRandomNumber(0, 2));
+};
+
+export {getRandomArrayItem, getRandomNumber, getRandomBoolean};
