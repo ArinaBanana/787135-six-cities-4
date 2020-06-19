@@ -15,25 +15,22 @@ const getRandomBoolean = () => {
 function throttle(func, ms) {
   let isThrottled = false;
   let savedArgs;
-  let savedThis;
 
-  function wrapper() {
+  function wrapper(...args) {
     if (isThrottled) {
-      savedArgs = arguments;
-      savedThis = this;
-
+      savedArgs = args;
       return;
     }
 
-    func.apply(this, arguments);
+    func.call(null, ...args);
 
     isThrottled = true;
 
     setTimeout(function () {
       isThrottled = false;
       if (savedArgs) {
-        wrapper.apply(savedThis, savedArgs);
-        savedArgs = savedThis = null;
+        wrapper.call(null, ...savedArgs);
+        savedArgs = null;
       }
     }, ms);
   }
