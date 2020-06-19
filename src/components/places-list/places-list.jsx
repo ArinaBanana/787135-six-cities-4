@@ -17,6 +17,12 @@ class PlacesList extends PureComponent {
   }
 
   handleMouseMove(placeId) {
+    const {activeCard} = this.state;
+
+    if (activeCard === placeId) {
+      return;
+    }
+
     this.setState({
       activeCard: placeId
     });
