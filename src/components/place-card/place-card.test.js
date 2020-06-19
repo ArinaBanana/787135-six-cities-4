@@ -14,7 +14,7 @@ const place = {
 };
 
 it(`Should render Place Card`, () => {
-  const tree = renderer.create(<PlaceCard place={place} onTitleClick={() => {}} />).toJSON();
+  const tree = renderer.create(<PlaceCard place={place} onTitleClick={() => {}} onMouseMove={() => {}} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

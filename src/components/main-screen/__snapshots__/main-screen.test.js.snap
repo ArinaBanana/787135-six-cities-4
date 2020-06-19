@@ -226,6 +226,7 @@ exports[`Should render Main Screen 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseMove={[Function]}
             >
               
               <div
@@ -317,12 +318,13 @@ exports[`Should render Main Screen 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  apartment
                 </p>
               </div>
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseMove={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -420,7 +422,7 @@ exports[`Should render Main Screen 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  room
                 </p>
               </div>
             </article>
