@@ -7,13 +7,26 @@ class PlaceCard extends PureComponent {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  handleClick() {
+    const {onTitleClick, place} = this.props;
+
+    return onTitleClick(place.id);
+  }
+
+  handleMouseMove() {
+    const {onMouseMove, place} = this.props;
+
+    return onMouseMove(place.id);
   }
 
   render() {
     const {place} = this.props;
 
     return (
-      <article className="cities__place-card place-card">
+      <article className="cities__place-card place-card" onMouseMove={this.handleMouseMove}>
 
         {
           place.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``
@@ -51,16 +64,11 @@ class PlaceCard extends PureComponent {
       </article>
     );
   }
-
-  handleClick() {
-    const {onTitleClick, place} = this.props;
-
-    return onTitleClick(place.id);
-  }
 }
 
 PlaceCard.propTypes = {
   onTitleClick: PropTypes.func.isRequired,
+  onMouseMove: PropTypes.func.isRequired,
   place: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
