@@ -1,37 +1,15 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import MainScreen from "../main-screen/main-screen.jsx";
-import DetailedInfoScreen from "../detailed-info-screen/detailed-info-screen.jsx";
+import {BrowserRouter} from "react-router-dom";
+import Screens from "../screens";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleTitlePlaceClick = this.handleTitlePlaceClick.bind(this);
-  }
-
-  handleTitlePlaceClick(id) {
-    return id;
-  }
-
+class App extends PureComponent {
   render() {
     const {countPlaces, places} = this.props;
 
     return (
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <MainScreen
-              countPlaces={countPlaces}
-              places={places}
-              onTitleClick={this.handleTitlePlaceClick}
-            />
-          </Route>
-          <Route exact path="/dev-detailed">
-            <DetailedInfoScreen />
-          </Route>
-        </Switch>
+        <Screens places={places} countPlaces={countPlaces} />
       </BrowserRouter>
     );
   }
