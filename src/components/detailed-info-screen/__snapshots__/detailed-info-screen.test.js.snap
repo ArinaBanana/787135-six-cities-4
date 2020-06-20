@@ -130,23 +130,17 @@ exports[`Should render Detailed Info Screen 1`] = `
         <div
           className="property__wrapper"
         >
-          <div
-            className="property__mark"
-          >
-            <span>
-              Premium
-            </span>
-          </div>
+          
           <div
             className="property__name-wrapper"
           >
             <h1
               className="property__name"
             >
-              Beautiful & luxurious studio at great location
+              Foo bar
             </h1>
             <button
-              className="property__bookmark-button button"
+              className="property__bookmark-button button place-card__bookmark-button--active"
               type="button"
             >
               <svg
@@ -174,7 +168,7 @@ exports[`Should render Detailed Info Screen 1`] = `
               <span
                 style={
                   Object {
-                    "width": "80%",
+                    "width": "20%",
                   }
                 }
               />
@@ -196,7 +190,7 @@ exports[`Should render Detailed Info Screen 1`] = `
             <li
               className="property__feature property__feature--entire"
             >
-              Apartment
+              apartment
             </li>
             <li
               className="property__feature property__feature--bedrooms"
@@ -215,7 +209,8 @@ exports[`Should render Detailed Info Screen 1`] = `
             <b
               className="property__price-value"
             >
-              €120
+              €
+              45
             </b>
             <span
               className="property__price-text"

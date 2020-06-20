@@ -1,7 +1,15 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import cn from "classnames";
 
 class DetailedInfoScreen extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const {place} = this.props;
+
     return (
       <div className="page">
         <header className="header">
@@ -53,14 +61,16 @@ class DetailedInfoScreen extends PureComponent {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                <div className="property__mark">
-                  <span>Premium</span>
-                </div>
+
+                {
+                  place.isPremium ? <div className="property__mark"><span>Premium</span></div> : ``
+                }
+
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    Beautiful &amp; luxurious studio at great location
+                    {place.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className={cn(`property__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -69,14 +79,14 @@ class DetailedInfoScreen extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `80%`}} />
+                    <span style={{width: place.rating}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">4.8</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    Apartment
+                    {place.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
                     3 Bedrooms
@@ -86,7 +96,7 @@ class DetailedInfoScreen extends PureComponent {
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">&euro;120</b>
+                  <b className="property__price-value">&euro;{place.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
@@ -331,5 +341,18 @@ class DetailedInfoScreen extends PureComponent {
     );
   }
 }
+
+DetailedInfoScreen.propTypes = {
+  place: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isBookmark: PropTypes.bool.isRequired
+  })
+};
 
 export default DetailedInfoScreen;
