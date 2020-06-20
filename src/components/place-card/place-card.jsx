@@ -13,7 +13,7 @@ class PlaceCard extends PureComponent {
   handleClick() {
     const {onTitleClick, place} = this.props;
 
-    return onTitleClick(place.id);
+    return onTitleClick(place);
   }
 
   handleMouseMove() {
