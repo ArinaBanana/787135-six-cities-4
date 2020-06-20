@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import {Route, Switch} from "react-router-dom";
-import {withRouter} from "react-router";
 
 import MainScreen from "../main-screen/main-screen.jsx";
 import DetailedInfoScreen from "../detailed-info-screen/detailed-info-screen.jsx";
