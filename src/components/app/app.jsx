@@ -1,20 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MainScreen from "../main-screen/main-screen.jsx";
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import {BrowserRouter} from "react-router-dom";
+import Screens from "../screens";
 
-const titlePlaceHandler = (id) => {
-  return id;
-};
+class App extends PureComponent {
+  render() {
+    const {countPlaces, places} = this.props;
 
-const App = ({countPlaces, places}) => {
-  return (
-    <MainScreen
-      countPlaces={countPlaces}
-      places={places}
-      onTitleClick={titlePlaceHandler}
-    />
-  );
-};
+    return (
+      <BrowserRouter>
+        <Screens places={places} countPlaces={countPlaces} />
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
   countPlaces: PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-import {COUNT_PLACES, generatePlaces} from './utils/mocks';
+import {COUNT_PLACES, generatePlaces} from './mocks/offers';
 
 const places = generatePlaces();
 

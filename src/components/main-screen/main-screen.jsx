@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from "../place-card/place-card.jsx";
+import PlacesList from "../places-list/places-list.jsx";
 
 const MainScreen = ({countPlaces, places, onTitleClick}) => {
   return (
@@ -76,7 +76,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                 <span className="places__sorting-type" tabIndex="0">
                   Popular
                   <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -86,14 +86,9 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {places.map((place) => <PlaceCard
-                  key={place.id}
-                  price={place.price}
-                  title={place.title}
-                  id={place.id}
-                  onTitleClick={onTitleClick} />)}
-              </div>
+
+              <PlacesList places={places} onTitleClick={onTitleClick} />
+
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
@@ -109,10 +104,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
 
 MainScreen.propTypes = {
   countPlaces: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  })),
+  places: PropTypes.array.isRequired,
   onTitleClick: PropTypes.func.isRequired
 };
 

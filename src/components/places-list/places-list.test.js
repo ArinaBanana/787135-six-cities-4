@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import React from "react";
+import renderer from "react-test-renderer";
+import PlacesList from "./places-list";
 
 const places = [
   {
@@ -25,8 +25,8 @@ const places = [
   }
 ];
 
-it(`Should render App`, () => {
-  const tree = renderer.create(<App countPlaces={312} places={places} />).toJSON();
+it(`Should render Places List`, () => {
+  const tree = renderer.create(<PlacesList onTitleClick={() => {}} places={places} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
