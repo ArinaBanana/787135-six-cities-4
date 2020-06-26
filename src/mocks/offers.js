@@ -26,6 +26,13 @@ const types = [
   `Standard`
 ];
 
+const coordinates = [
+  [52.3909553943508, 4.85309666406198],
+  [52.369553943508, 4.85309666406198],
+  [52.3909553943508, 4.929309666406198],
+  [52.3809553943508, 4.939309666406198]
+];
+
 const makeIdGenerator = () => {
   let counter = 0;
 
@@ -43,6 +50,7 @@ const generatePlace = () => {
     price: getRandomArrayItem(prices),
     img: getRandomArrayItem(imageSource),
     type: getRandomArrayItem(types),
+    coordinates: getRandomArrayItem(coordinates),
     rating: `${getRandomNumber(50, 100)}%`,
     isPremium: getRandomBoolean(),
     isBookmark: getRandomBoolean()
