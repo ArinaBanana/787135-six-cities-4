@@ -17,10 +17,7 @@ class App extends PureComponent {
 
 App.propTypes = {
   countPlaces: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }))
+  places: PropTypes.array.isRequired
 };
 
 export default App;

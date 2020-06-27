@@ -11,7 +11,8 @@ const places = [
     type: `apartment`,
     rating: `20%`,
     isPremium: false,
-    isBookmark: true
+    isBookmark: true,
+    coordinates: [52.3809553943508, 4.939309666406198]
   },
   {
     id: 9,
@@ -21,12 +22,15 @@ const places = [
     type: `room`,
     rating: `80%`,
     isPremium: true,
-    isBookmark: true
+    isBookmark: true,
+    coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];
 
 it(`Should render Main Screen`, () => {
-  const tree = renderer.create(<MainScreen countPlaces={6758} places={places} onTitleClick={()=> {}} />).toJSON();
+  const tree = renderer.create(<MainScreen countPlaces={6758} places={places} onTitleClick={()=> {}} />, {createNodeMock: () => {
+    return document.createElement(`div`);
+  }}).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
