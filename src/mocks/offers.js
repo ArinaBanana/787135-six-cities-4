@@ -33,6 +33,15 @@ const coordinates = [
   [52.3809553943508, 4.939309666406198]
 ];
 
+const makeCoordinatesGenerator = () => {
+  const randomIndex = getRandomNumber(0, coordinates.length);
+  const item = coordinates[randomIndex];
+
+  coordinates.splice(randomIndex, 1);
+
+  return item;
+};
+
 const makeIdGenerator = () => {
   let counter = 0;
 
@@ -50,7 +59,7 @@ const generatePlace = () => {
     price: getRandomArrayItem(prices),
     img: getRandomArrayItem(imageSource),
     type: getRandomArrayItem(types),
-    coordinates: getRandomArrayItem(coordinates),
+    coordinates: makeCoordinatesGenerator(),
     rating: `${getRandomNumber(50, 100)}%`,
     isPremium: getRandomBoolean(),
     isBookmark: getRandomBoolean()
