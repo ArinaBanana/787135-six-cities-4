@@ -1306,7 +1306,15 @@ exports[`Screens snapshots Should render main screen 1`] = `
         >
           <section
             className="cities__map map"
-          />
+          >
+            <div
+              style={
+                Object {
+                  "height": "635px",
+                }
+              }
+            />
+          </section>
         </div>
       </div>
     </div>

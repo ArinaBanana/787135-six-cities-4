@@ -13,7 +13,8 @@ const places = [
     type: `apartment`,
     rating: `20%`,
     isPremium: false,
-    isBookmark: true
+    isBookmark: true,
+    coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
     id: 9,
@@ -23,7 +24,8 @@ const places = [
     type: `room`,
     rating: `80%`,
     isPremium: true,
-    isBookmark: true
+    isBookmark: true,
+    coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];
 
@@ -31,7 +33,9 @@ describe(`Screens snapshots`, () => {
   it(`Should render main screen`, () => {
     const tree = renderer.create(<MemoryRouter initialEntries={[`/`]}>
       <ScreensWithRouter countPlaces={67} places={places} />
-    </MemoryRouter>).toJSON();
+    </MemoryRouter>, {createNodeMock: () => {
+      return document.createElement(`div`);
+    }}).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
@@ -39,7 +43,9 @@ describe(`Screens snapshots`, () => {
   it(`Should render detail info screen`, () => {
     const component = renderer.create(<MemoryRouter initialEntries={[`/`]}>
       <ScreensWithRouter countPlaces={67} places={places} />
-    </MemoryRouter>);
+    </MemoryRouter>, {createNodeMock: () => {
+      return document.createElement(`div`);
+    }});
 
     const instance = component.root.findByType(Screens).instance;
     instance.handlePlaceClick(places[0]);
