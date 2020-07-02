@@ -10,7 +10,7 @@ class Screens extends PureComponent {
     super(props);
 
     this.state = {
-      currentPlace: null
+      currentPlace: this.props.places[0]
     };
 
     this.handlePlaceClick = this.handlePlaceClick.bind(this);
