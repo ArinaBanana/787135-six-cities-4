@@ -27,7 +27,7 @@ class Screens extends PureComponent {
   }
 
   render() {
-    const {countPlaces, places} = this.props;
+    const {countPlaces, places, reviews} = this.props;
     const {currentPlace} = this.state;
 
     return (
@@ -40,7 +40,7 @@ class Screens extends PureComponent {
           />
         </Route>
         <Route exact path="/dev-detailed">
-          <DetailedInfoScreen place={currentPlace} />;
+          <DetailedInfoScreen place={currentPlace} reviews={reviews} />;
         </Route>
       </Switch>
     );
@@ -53,7 +53,8 @@ Screens.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   })),
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default Screens;

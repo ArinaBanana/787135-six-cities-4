@@ -5,11 +5,11 @@ import Screens from "../screens";
 
 class App extends PureComponent {
   render() {
-    const {countPlaces, places} = this.props;
+    const {countPlaces, places, reviews} = this.props;
 
     return (
       <BrowserRouter>
-        <Screens places={places} countPlaces={countPlaces} />
+        <Screens places={places} countPlaces={countPlaces} reviews={reviews} />
       </BrowserRouter>
     );
   }
@@ -17,7 +17,8 @@ class App extends PureComponent {
 
 App.propTypes = {
   countPlaces: PropTypes.number.isRequired,
-  places: PropTypes.array.isRequired
+  places: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired
 };
 
 export default App;

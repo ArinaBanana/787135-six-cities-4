@@ -9,7 +9,7 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   render() {
-    const {place} = this.props;
+    const {place, reviews} = this.props;
 
     return (
       <div className="page">
@@ -157,7 +157,7 @@ class DetailedInfoScreen extends PureComponent {
                   </div>
                 </div>
 
-                <ReviewsContainer />
+                <ReviewsContainer reviews={reviews} />
               </div>
             </div>
             <section className="property__map map" />
@@ -280,7 +280,8 @@ DetailedInfoScreen.propTypes = {
     rating: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired
-  })
+  }),
+  reviews: PropTypes.array.isRequired
 };
 
 export default DetailedInfoScreen;
