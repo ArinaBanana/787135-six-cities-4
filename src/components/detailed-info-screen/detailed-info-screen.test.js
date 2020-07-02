@@ -13,8 +13,18 @@ const place = {
   isBookmark: true
 };
 
+const reviews = [
+  {
+    id: 1,
+    username: `Jon`,
+    rating: `70%`,
+    message: `message`,
+    date: `date`,
+  }
+];
+
 it(`Should render Detailed Info Screen`, () => {
-  const tree = renderer.create(<DetailedInfoScreen place={place} />).toJSON();
+  const tree = renderer.create(<DetailedInfoScreen place={place} reviews={reviews} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
