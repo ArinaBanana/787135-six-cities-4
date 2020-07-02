@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {COUNT_PLACES, generatePlaces} from "./mocks/offers";
+import {generatePlaces} from "./mocks/offers";
 import {reviews} from "./mocks/reviews";
 
 const places = generatePlaces();
 
 ReactDOM.render(
     <App
-      countPlaces={COUNT_PLACES}
+      countPlaces={places.length}
       places={places}
       reviews={reviews}
     />,
