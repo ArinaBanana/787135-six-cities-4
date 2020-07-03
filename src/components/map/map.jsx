@@ -70,8 +70,10 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {height} = this.props;
+
     return (
-      <div ref={this._mapContainerRef} style={{height: `635px`}} />
+      <div ref={this._mapContainerRef} style={{height}} />
     );
   }
 }
@@ -79,8 +81,9 @@ class Map extends PureComponent {
 Map.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-    color: PropTypes.string
+    color: PropTypes.string.isRequired
   }).isRequired).isRequired,
+  height: PropTypes.string.isRequired
 };
 
 export default Map;

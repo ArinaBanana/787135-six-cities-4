@@ -73,7 +73,7 @@ class DetailedInfoScreen extends PureComponent {
                     {place.title}
                   </h1>
                   <button className={cn(`property__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})} type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
+                    <svg className={cn(`property__bookmark-icon`, {"place-card__bookmark-icon": place.isBookmark})} width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
@@ -162,7 +162,7 @@ class DetailedInfoScreen extends PureComponent {
               </div>
             </div>
             <section className="property__map map" >
-              <Map markers={nearPlaces} />
+              <Map markers={nearPlaces} height={`579px`} />
             </section>
           </section>
           <div className="container">

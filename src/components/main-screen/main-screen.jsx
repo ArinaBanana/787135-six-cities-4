@@ -101,7 +101,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map markers={markers} />
+                <Map markers={markers} height={`635px`} />
               </section>
             </div>
           </div>
