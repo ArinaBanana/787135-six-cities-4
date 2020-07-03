@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
+import Map from "../map/map.jsx";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -9,7 +10,7 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   render() {
-    const {place, reviews} = this.props;
+    const {place, reviews, nearPlaces} = this.props;
 
     return (
       <div className="page">
@@ -160,7 +161,9 @@ class DetailedInfoScreen extends PureComponent {
                 <ReviewsContainer reviews={reviews} />
               </div>
             </div>
-            <section className="property__map map" />
+            <section className="property__map map" >
+              <Map markers={nearPlaces} />
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">
@@ -281,7 +284,8 @@ DetailedInfoScreen.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired
   }),
-  reviews: PropTypes.array.isRequired
+  reviews: PropTypes.array.isRequired,
+  nearPlaces: PropTypes.array.isRequired
 };
 
 export default DetailedInfoScreen;

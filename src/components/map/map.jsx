@@ -21,9 +21,9 @@ class Map extends PureComponent {
     return markers.map((marker) => marker.coordinates);
   }
 
-  _getIconPin() {
+  _getIconPin(color) {
     return leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: color,
       iconSize: [30, 30]
     });
   }
@@ -48,18 +48,20 @@ class Map extends PureComponent {
   }
 
   _renderMapCoordinates(map) {
-    this._coordinates = this._getCoordinates();
-    const icon = this._getIconPin();
+    const {markers} = this.props;
 
-    this._coordinates.forEach((coordinate) => {
+    markers.forEach((marker) => {
+      const icon = this._getIconPin(marker.color);
+
       leaflet
-        .marker(coordinate, {icon})
+        .marker(marker.coordinates, {icon})
         .addTo(map);
     });
   }
 
   _fitBounds(map) {
-    const bounds = leaflet.latLngBounds(this._coordinates);
+    const coordinates = this._getCoordinates();
+    const bounds = leaflet.latLngBounds(coordinates);
     map.fitBounds(bounds, {padding: [7, 7]});
   }
 
@@ -76,7 +78,8 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.shape({
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    color: PropTypes.string
   }).isRequired).isRequired,
 };
 

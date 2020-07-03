@@ -4,6 +4,14 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 const MainScreen = ({countPlaces, places, onTitleClick}) => {
+  const markers = places.map((place) => {
+    return {
+      id: place.id,
+      coordinates: place.coordinates,
+      color: `img/pin.svg`
+    };
+  });
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -93,7 +101,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map markers={places}/>
+                <Map markers={markers} />
               </section>
             </div>
           </div>

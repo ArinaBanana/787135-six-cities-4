@@ -13,10 +13,11 @@ class Screens extends PureComponent {
       currentPlace: this.props.places[0]
     };
 
-    this.handlePlaceClick = this.handlePlaceClick.bind(this);
+    this._handlePlaceClick = this._handlePlaceClick.bind(this);
+    this._getNearPlaces = this._getNearPlaces.bind(this);
   }
 
-  handlePlaceClick(place) {
+  _handlePlaceClick(place) {
     const {history} = this.props;
 
     this.setState({
@@ -26,9 +27,27 @@ class Screens extends PureComponent {
     });
   }
 
+  _getNearPlaces() {
+    const {places} = this.props;
+    const {currentPlace} = this.state;
+
+    return places.map((place) => {
+      const isActiveMarker = place.id === currentPlace.id;
+      const color = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
+
+      return {
+        id: place.id,
+        coordinates: place.coordinates,
+        color
+      };
+    });
+  }
+
   render() {
     const {countPlaces, places, reviews} = this.props;
     const {currentPlace} = this.state;
+
+    const nearPlaces = this._getNearPlaces();
 
     return (
       <Switch>
@@ -36,11 +55,11 @@ class Screens extends PureComponent {
           <MainScreen
             countPlaces={countPlaces}
             places={places}
-            onTitleClick={this.handlePlaceClick}
+            onTitleClick={this._handlePlaceClick}
           />
         </Route>
         <Route exact path="/dev-detailed">
-          <DetailedInfoScreen place={currentPlace} reviews={reviews} />;
+          <DetailedInfoScreen place={currentPlace} reviews={reviews} nearPlaces={nearPlaces} />;
         </Route>
       </Switch>
     );
