@@ -35,11 +35,7 @@ class Screens extends PureComponent {
       const isActiveMarker = place.id === currentPlace.id;
       const color = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
 
-      return {
-        id: place.id,
-        coordinates: place.coordinates,
-        color
-      };
+      return Object.assign({}, ...[place], {color});
     });
   }
 
