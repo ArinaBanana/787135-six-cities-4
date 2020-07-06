@@ -31,18 +31,21 @@ class Screens extends PureComponent {
     const {places} = this.props;
     const {currentPlace} = this.state;
 
-    return places.map((place) => {
+    const nearPlaces = places.map((place) => {
       const isActiveMarker = place.id === currentPlace.id;
       const color = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
 
       return Object.assign({}, ...[place], {color});
     });
+
+    this._currentPlaceWithColorPin = nearPlaces.find((item) => item.color === `img/pin-active.svg`);
+
+    // В этом месте фильтровать так же по условию "находятся рядом"
+    return nearPlaces.filter((item) => item !== this._currentPlaceWithColorPin).slice(0, 3);
   }
 
   render() {
     const {countPlaces, places, reviews} = this.props;
-    const {currentPlace} = this.state;
-
     const nearPlaces = this._getNearPlaces();
 
     return (
@@ -55,7 +58,7 @@ class Screens extends PureComponent {
           />
         </Route>
         <Route exact path="/dev-detailed">
-          <DetailedInfoScreen place={currentPlace} reviews={reviews} nearPlaces={nearPlaces} />;
+          <DetailedInfoScreen place={this._currentPlaceWithColorPin} reviews={reviews} nearPlaces={nearPlaces} />;
         </Route>
       </Switch>
     );

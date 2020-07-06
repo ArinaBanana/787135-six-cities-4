@@ -8,21 +8,19 @@ import PlacesList from "../places-list/places-list.jsx";
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
     super(props);
-
-    this._getNearPlaces = this._getNearPlaces.bind(this);
   }
 
-  _getNearPlaces() {
-    const {nearPlaces} = this.props;
-    const current = nearPlaces.find((item) => item.color === `img/pin-active.svg`);
+  _getPlacesForMap() {
+    const {nearPlaces, place} = this.props;
 
-    // В этом месте фильтровать так же по условию "находятся рядом"
-    return nearPlaces.filter((item) => item !== current).slice(0, 3);
+    const placesForMap = nearPlaces.slice();
+    placesForMap.push(place);
+    return placesForMap;
   }
 
   render() {
     const {place, reviews, nearPlaces} = this.props;
-    const places = this._getNearPlaces();
+    const placesForMap = this._getPlacesForMap();
 
     return (
       <div className="page">
@@ -174,13 +172,13 @@ class DetailedInfoScreen extends PureComponent {
               </div>
             </div>
             <section className="property__map map" >
-              <Map markers={nearPlaces} height={`579px`} />
+              <Map markers={placesForMap} height={`579px`} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <PlacesList places={places} onTitleClick={() => {}} isNearList={true} />
+              <PlacesList places={nearPlaces} onTitleClick={() => {}} isNearList={true} />
             </section>
           </div>
         </main>
