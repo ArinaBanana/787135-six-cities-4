@@ -11,9 +11,9 @@ class PlacesList extends PureComponent {
       activeCard: -1
     };
 
-    this.throttledHandleMouseMove = throttle(this.handleMouseMove, 200);
-
     this.handleMouseMove = this.handleMouseMove.bind(this);
+
+    this.throttledHandleMouseMove = throttle(this.handleMouseMove, 200);
   }
 
   handleMouseMove(placeId) {
