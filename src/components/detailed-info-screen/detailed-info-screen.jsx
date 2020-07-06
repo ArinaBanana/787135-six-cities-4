@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import cn from "classnames";
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
-import NearPlacesList from "../near-places-list/near-places-list.jsx";
+import PlacesList from "../places-list/places-list.jsx";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -180,7 +180,7 @@ class DetailedInfoScreen extends PureComponent {
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <NearPlacesList nearPlaces={places} />
+              <PlacesList places={places} onTitleClick={() => {}} isNearList={true} />
             </section>
           </div>
         </main>

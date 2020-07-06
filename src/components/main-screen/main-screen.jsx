@@ -96,7 +96,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                 </ul>
               </form>
 
-              <PlacesList places={places} onTitleClick={onTitleClick} />
+              <PlacesList places={places} onTitleClick={onTitleClick} isNearList={false} />
 
             </section>
             <div className="cities__right-section">
