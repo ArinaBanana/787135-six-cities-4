@@ -26,7 +26,7 @@ const places = [
 ];
 
 it(`Should render Places List`, () => {
-  const tree = renderer.create(<PlacesList onTitleClick={() => {}} places={places} />).toJSON();
+  const tree = renderer.create(<PlacesList onTitleClick={() => {}} places={places} isNearList={false} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

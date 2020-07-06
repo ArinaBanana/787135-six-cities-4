@@ -58,7 +58,7 @@ describe(`Screens snapshots`, () => {
     }});
 
     const instance = component.root.findByType(Screens).instance;
-    instance.handlePlaceClick(places[0]);
+    instance._handlePlaceClick(places[0]);
 
     const tree = component.toJSON();
 

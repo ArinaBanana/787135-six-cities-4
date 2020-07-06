@@ -4,7 +4,7 @@ exports[`Should render Map 1`] = `
 <div
   style={
     Object {
-      "height": "635px",
+      "height": "600px",
     }
   }
 />
