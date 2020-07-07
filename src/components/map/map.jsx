@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {CITY as city, ZOOM as zoom, TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/const";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -10,10 +11,10 @@ class Map extends PureComponent {
   }
 
   _configureLeafletMap() {
-    const map = this._createMap();
-    this._addTileLayer(map);
-    this._renderMapCoordinates(map);
-    this._fitBounds(map);
+    this._createMap();
+    this._addTileLayer();
+    this._renderMapCoordinates();
+    this._fitBounds();
   }
 
   _getCoordinates() {
@@ -29,9 +30,7 @@ class Map extends PureComponent {
   }
 
   _createMap() {
-    const city = [52.38333, 4.9];
-    const zoom = 12;
-    return leaflet.map(this._mapContainerRef.current, {
+    this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
       zoom,
       zoomControl: false,
@@ -39,15 +38,13 @@ class Map extends PureComponent {
     });
   }
 
-  _addTileLayer(map) {
-    return leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(map);
+  _addTileLayer() {
+    leaflet
+      .tileLayer(TILES_URL, tileLayerOptions)
+      .addTo(this._map);
   }
 
-  _renderMapCoordinates(map) {
+  _renderMapCoordinates() {
     const {markers} = this.props;
 
     markers.forEach((marker) => {
@@ -55,14 +52,14 @@ class Map extends PureComponent {
 
       leaflet
         .marker(marker.coordinates, {icon})
-        .addTo(map);
+        .addTo(this._map);
     });
   }
 
-  _fitBounds(map) {
+  _fitBounds() {
     const coordinates = this._getCoordinates();
     const bounds = leaflet.latLngBounds(coordinates);
-    map.fitBounds(bounds, {padding: [7, 7]});
+    this._map.fitBounds(bounds, fitBoundsOptions);
   }
 
   componentDidMount() {
@@ -82,8 +79,12 @@ Map.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     color: PropTypes.string.isRequired
-  }).isRequired).isRequired,
+  })),
   height: PropTypes.string.isRequired
+};
+
+Map.defaultProps = {
+  markers: [],
 };
 
 export default Map;
