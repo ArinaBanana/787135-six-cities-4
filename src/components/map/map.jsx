@@ -8,12 +8,14 @@ class Map extends PureComponent {
     super(props);
 
     this._mapContainerRef = React.createRef();
+
+    this._renderMarker = this._renderMarker.bind(this);
   }
 
   _configureLeafletMap() {
     this._createMap();
     this._addTileLayer();
-    this._renderMapCoordinates();
+    this._renderMarkers();
     this._fitBounds();
   }
 
@@ -44,16 +46,18 @@ class Map extends PureComponent {
       .addTo(this._map);
   }
 
-  _renderMapCoordinates() {
+  _renderMarkers() {
     const {markers} = this.props;
 
-    markers.forEach((marker) => {
-      const icon = this._getIconPin(marker.color);
+    markers.forEach((marker) => this._renderMarker(marker));
+  }
 
-      leaflet
-        .marker(marker.coordinates, {icon})
-        .addTo(this._map);
-    });
+  _renderMarker(marker) {
+    const icon = this._getIconPin(marker.color);
+
+    leaflet
+      .marker(marker.coordinates, {icon})
+      .addTo(this._map);
   }
 
   _fitBounds() {
