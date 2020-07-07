@@ -33,12 +33,12 @@ class Screens extends PureComponent {
 
     const nearPlaces = places.map((place) => {
       const isActiveMarker = place.id === currentPlace.id;
-      const color = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
+      const iconUrl = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
 
-      return Object.assign({}, ...[place], {color});
+      return Object.assign({}, ...[place], {iconUrl});
     });
 
-    this._currentPlaceWithColorPin = nearPlaces.find((item) => item.color === `img/pin-active.svg`);
+    this._currentPlaceWithColorPin = nearPlaces.find((item) => item.iconUrl === `img/pin-active.svg`);
 
     // В этом месте фильтровать так же по условию "находятся рядом"
     return nearPlaces.filter((item) => item !== this._currentPlaceWithColorPin).slice(0, 3);

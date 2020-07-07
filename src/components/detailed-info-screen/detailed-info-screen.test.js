@@ -12,7 +12,7 @@ const places = [
     rating: `20%`,
     isPremium: false,
     isBookmark: true,
-    color: `path`,
+    iconUrl: `path`,
     coordinates: [52.3809553943508, 4.939309666406198]
   }
 ];

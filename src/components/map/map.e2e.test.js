@@ -21,11 +21,11 @@ jest.mock(`leaflet`, () => {
 const markers = [
   {
     coordinates: [52.3909553943508, 4.85309666406198],
-    color: `path`
+    iconUrl: `path`
   },
   {
     coordinates: [52.3809553943508, 4.939309666406198],
-    color: `path`
+    iconUrl: `path`
   }
 ];
 
@@ -44,9 +44,9 @@ describe(`Check Map methods`, () => {
   });
 
   it(`Should return leaflet icon with black color. getIconPin`, () => {
-    const color = `black`;
+    const iconUrl = `black`;
     const opts = {
-      iconUrl: color,
+      iconUrl,
       iconSize: [30, 30]
     };
     leaflet.icon.mockImplementationOnce((options) => {
@@ -54,7 +54,7 @@ describe(`Check Map methods`, () => {
         options
       };
     });
-    const result = Map.prototype._getIconPin(color);
+    const result = Map.prototype._getIconPin(iconUrl);
 
     expect(result).toEqual({options: opts});
   });

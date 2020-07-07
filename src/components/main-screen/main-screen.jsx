@@ -8,7 +8,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
     return {
       id: place.id,
       coordinates: place.coordinates,
-      color: `img/pin.svg`
+      iconUrl: `img/pin.svg`
     };
   });
 

@@ -24,9 +24,9 @@ class Map extends PureComponent {
     return markers.map((marker) => marker.coordinates);
   }
 
-  _getIconPin(color) {
+  _getIconPin(iconUrl) {
     return leaflet.icon({
-      iconUrl: color,
+      iconUrl,
       iconSize: [30, 30]
     });
   }
@@ -53,7 +53,7 @@ class Map extends PureComponent {
   }
 
   _renderMarker(marker) {
-    const icon = this._getIconPin(marker.color);
+    const icon = this._getIconPin(marker.iconUrl);
 
     leaflet
       .marker(marker.coordinates, {icon})
@@ -82,7 +82,7 @@ class Map extends PureComponent {
 Map.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.shape({
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
-    color: PropTypes.string.isRequired
+    iconUrl: PropTypes.string.isRequired
   })),
   height: PropTypes.string.isRequired
 };
