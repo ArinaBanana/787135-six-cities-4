@@ -27,8 +27,18 @@ const places = [
   }
 ];
 
+const reviews = [
+  {
+    id: 1,
+    username: `Jon`,
+    rating: `70%`,
+    message: `message`,
+    date: `date`,
+  }
+];
+
 it(`Should render App`, () => {
-  const tree = renderer.create(<App countPlaces={312} places={places} />, {createNodeMock: () => {
+  const tree = renderer.create(<App countPlaces={312} places={places} reviews={reviews} />, {createNodeMock: () => {
     return document.createElement(`div`);
   }}
   ).toJSON();

@@ -29,10 +29,20 @@ const places = [
   }
 ];
 
+const reviews = [
+  {
+    id: 1,
+    username: `Jon`,
+    rating: `70%`,
+    message: `message`,
+    date: `date`,
+  }
+];
+
 describe(`Screens snapshots`, () => {
   it(`Should render main screen`, () => {
     const tree = renderer.create(<MemoryRouter initialEntries={[`/`]}>
-      <ScreensWithRouter countPlaces={67} places={places} />
+      <ScreensWithRouter countPlaces={67} places={places} reviews={reviews} />
     </MemoryRouter>, {createNodeMock: () => {
       return document.createElement(`div`);
     }}).toJSON();
@@ -42,13 +52,13 @@ describe(`Screens snapshots`, () => {
 
   it(`Should render detail info screen`, () => {
     const component = renderer.create(<MemoryRouter initialEntries={[`/`]}>
-      <ScreensWithRouter countPlaces={67} places={places} />
+      <ScreensWithRouter countPlaces={67} places={places} reviews={reviews} />
     </MemoryRouter>, {createNodeMock: () => {
       return document.createElement(`div`);
     }});
 
     const instance = component.root.findByType(Screens).instance;
-    instance.handlePlaceClick(places[0]);
+    instance._handlePlaceClick(places[0]);
 
     const tree = component.toJSON();
 

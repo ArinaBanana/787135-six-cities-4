@@ -1,6 +1,5 @@
 import {getRandomArrayItem, getRandomNumber, getRandomBoolean} from "../utils/func";
 
-const COUNT_PLACES = 312;
 const COUNT_SHOWED_PLACES = 4;
 
 const titles = [
@@ -72,4 +71,4 @@ const generatePlaces = () => {
     .map(generatePlace);
 };
 
-export {COUNT_PLACES, generatePlaces};
+export {generatePlaces};

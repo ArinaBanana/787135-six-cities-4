@@ -10,13 +10,14 @@ class Screens extends PureComponent {
     super(props);
 
     this.state = {
-      currentPlace: null
+      currentPlace: this.props.places[0]
     };
 
-    this.handlePlaceClick = this.handlePlaceClick.bind(this);
+    this._handlePlaceClick = this._handlePlaceClick.bind(this);
+    this._getNearPlaces = this._getNearPlaces.bind(this);
   }
 
-  handlePlaceClick(place) {
+  _handlePlaceClick(place) {
     const {history} = this.props;
 
     this.setState({
@@ -26,9 +27,26 @@ class Screens extends PureComponent {
     });
   }
 
-  render() {
-    const {countPlaces, places} = this.props;
+  _getNearPlaces() {
+    const {places} = this.props;
     const {currentPlace} = this.state;
+
+    const nearPlaces = places.map((place) => {
+      const isActiveMarker = place.id === currentPlace.id;
+      const iconUrl = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
+
+      return Object.assign({}, ...[place], {iconUrl});
+    });
+
+    this._currentPlaceWithColorPin = nearPlaces.find((item) => item.iconUrl === `img/pin-active.svg`);
+
+    // В этом месте фильтровать так же по условию "находятся рядом"
+    return nearPlaces.filter((item) => item !== this._currentPlaceWithColorPin).slice(0, 3);
+  }
+
+  render() {
+    const {countPlaces, places, reviews} = this.props;
+    const nearPlaces = this._getNearPlaces();
 
     return (
       <Switch>
@@ -36,11 +54,11 @@ class Screens extends PureComponent {
           <MainScreen
             countPlaces={countPlaces}
             places={places}
-            onTitleClick={this.handlePlaceClick}
+            onTitleClick={this._handlePlaceClick}
           />
         </Route>
         <Route exact path="/dev-detailed">
-          <DetailedInfoScreen place={currentPlace} />;
+          <DetailedInfoScreen place={this._currentPlaceWithColorPin} reviews={reviews} nearPlaces={nearPlaces} />;
         </Route>
       </Switch>
     );
@@ -53,7 +71,8 @@ Screens.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   })),
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default Screens;

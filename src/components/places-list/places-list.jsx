@@ -29,10 +29,10 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {places, onTitleClick} = this.props;
+    const {places, onTitleClick, isNearList} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={isNearList ? `near-places__list places__list` : `cities__places-list places__list tabs__content`}>
         {
           places.map((place) => <PlaceCard
             key={place.id}
@@ -48,7 +48,8 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object),
-  onTitleClick: PropTypes.func.isRequired
+  onTitleClick: PropTypes.func.isRequired,
+  isNearList: PropTypes.bool.isRequired
 };
 
 export default PlacesList;

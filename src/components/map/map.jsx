@@ -1,19 +1,22 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {CITY as city, ZOOM as zoom, TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/const";
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
 
     this._mapContainerRef = React.createRef();
+
+    this._renderMarker = this._renderMarker.bind(this);
   }
 
   _configureLeafletMap() {
-    const map = this._createMap();
-    this._addTileLayer(map);
-    this._renderMapCoordinates(map);
-    this._fitBounds(map);
+    this._createMap();
+    this._addTileLayer();
+    this._renderMarkers();
+    this._fitBounds();
   }
 
   _getCoordinates() {
@@ -21,17 +24,15 @@ class Map extends PureComponent {
     return markers.map((marker) => marker.coordinates);
   }
 
-  _getIconPin() {
+  _getIconPin(iconUrl) {
     return leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl,
       iconSize: [30, 30]
     });
   }
 
   _createMap() {
-    const city = [52.38333, 4.9];
-    const zoom = 12;
-    return leaflet.map(this._mapContainerRef.current, {
+    this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
       zoom,
       zoomControl: false,
@@ -39,28 +40,30 @@ class Map extends PureComponent {
     });
   }
 
-  _addTileLayer(map) {
-    return leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(map);
+  _addTileLayer() {
+    leaflet
+      .tileLayer(TILES_URL, tileLayerOptions)
+      .addTo(this._map);
   }
 
-  _renderMapCoordinates(map) {
-    this._coordinates = this._getCoordinates();
-    const icon = this._getIconPin();
+  _renderMarkers() {
+    const {markers} = this.props;
 
-    this._coordinates.forEach((coordinate) => {
-      leaflet
-        .marker(coordinate, {icon})
-        .addTo(map);
-    });
+    markers.forEach((marker) => this._renderMarker(marker));
   }
 
-  _fitBounds(map) {
-    const bounds = leaflet.latLngBounds(this._coordinates);
-    map.fitBounds(bounds, {padding: [7, 7]});
+  _renderMarker(marker) {
+    const icon = this._getIconPin(marker.iconUrl);
+
+    leaflet
+      .marker(marker.coordinates, {icon})
+      .addTo(this._map);
+  }
+
+  _fitBounds() {
+    const coordinates = this._getCoordinates();
+    const bounds = leaflet.latLngBounds(coordinates);
+    this._map.fitBounds(bounds, fitBoundsOptions);
   }
 
   componentDidMount() {
@@ -68,16 +71,24 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {height} = this.props;
+
     return (
-      <div ref={this._mapContainerRef} style={{height: `635px`}} />
+      <div ref={this._mapContainerRef} style={{height}} />
     );
   }
 }
 
 Map.propTypes = {
   markers: PropTypes.arrayOf(PropTypes.shape({
-    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired
-  }).isRequired).isRequired,
+    coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    iconUrl: PropTypes.string.isRequired
+  })),
+  height: PropTypes.string.isRequired
+};
+
+Map.defaultProps = {
+  markers: [],
 };
 
 export default Map;
