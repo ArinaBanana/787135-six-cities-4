@@ -61,7 +61,11 @@ const generatePlace = () => {
     coordinates: makeCoordinatesGenerator(),
     rating: `${getRandomNumber(50, 100)}%`,
     isPremium: getRandomBoolean(),
-    isBookmark: getRandomBoolean()
+    isBookmark: getRandomBoolean(),
+    city: {
+      name: `Amsterdam`,
+      coordinates: {}
+    }
   };
 };
 
