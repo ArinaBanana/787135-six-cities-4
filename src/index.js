@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app/app.jsx";
-import {generatePlaces} from "./mocks/offers";
-import {reviews} from "./mocks/reviews";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 
-const places = generatePlaces();
+import App from "./components/app/app.jsx";
+import {reducer} from "./reducer";
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
-    <App
-      countPlaces={places.length}
-      places={places}
-      reviews={reviews}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById(`root`)
 );

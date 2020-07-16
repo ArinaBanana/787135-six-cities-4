@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
+import {createSelector} from "reselect";
 
 import MainScreen from "../main-screen/main-screen.jsx";
 import DetailedInfoScreen from "../detailed-info-screen/detailed-info-screen.jsx";
@@ -9,9 +11,7 @@ class Screens extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      currentPlace: this.props.places[0]
-    };
+    this._currentPlace = this.props.places[0];
 
     this._handlePlaceClick = this._handlePlaceClick.bind(this);
     this._getNearPlaces = this._getNearPlaces.bind(this);
@@ -20,19 +20,15 @@ class Screens extends PureComponent {
   _handlePlaceClick(place) {
     const {history} = this.props;
 
-    this.setState({
-      currentPlace: place
-    }, () => {
-      history.push(`/dev-detailed`);
-    });
+    this._currentPlace = place;
+    history.push(`/dev-detailed`);
   }
 
   _getNearPlaces() {
     const {places} = this.props;
-    const {currentPlace} = this.state;
 
     const nearPlaces = places.map((place) => {
-      const isActiveMarker = place.id === currentPlace.id;
+      const isActiveMarker = place.id === this._currentPlace.id;
       const iconUrl = isActiveMarker ? `img/pin-active.svg` : `img/pin.svg`;
 
       return Object.assign({}, ...[place], {iconUrl});
@@ -65,6 +61,25 @@ class Screens extends PureComponent {
   }
 }
 
+const getLocationSelector = (state) => state.location;
+const getOffersSelector = (state) => state.offers;
+
+const getPlacesByCurrentLocation = createSelector(
+    getLocationSelector,
+    getOffersSelector,
+    (location, offers) => {
+      return offers.filter((offer) => {
+        return offer.city.name === location;
+      });
+    }
+);
+
+const mapStateToProps = (state) => ({
+  places: getPlacesByCurrentLocation(state),
+  countPlaces: state.offers.length,
+  reviews: state.reviews
+});
+
 Screens.propTypes = {
   countPlaces: PropTypes.number.isRequired,
   places: PropTypes.arrayOf(PropTypes.shape({
@@ -75,4 +90,5 @@ Screens.propTypes = {
   reviews: PropTypes.array.isRequired,
 };
 
-export default Screens;
+export {Screens};
+export default connect(mapStateToProps)(Screens);
