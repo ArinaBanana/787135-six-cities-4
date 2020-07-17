@@ -12,10 +12,10 @@ const titles = [
 const prices = [80, 120, 132, 180];
 
 const imageSource = [
-  `img/apartment-01.jpg`,
-  `img/room.jpg`,
-  `img/apartment-02.jpg`,
-  `img/apartment-03.jpg`
+  `/img/apartment-01.jpg`,
+  `/img/room.jpg`,
+  `/img/apartment-02.jpg`,
+  `/img/apartment-03.jpg`
 ];
 
 const types = [
