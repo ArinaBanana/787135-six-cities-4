@@ -1,10 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import LocationList from "../location-list/location-list.jsx";
+import {getPlacesByCurrentLocation} from "../../store/selectors/places";
 
-const MainScreen = ({countPlaces, places}) => {
+const MainScreen = ({places, currentLocation}) => {
   const markers = places.map((place) => {
     return {
       id: place.id,
@@ -66,7 +69,7 @@ const MainScreen = ({countPlaces, places}) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{countPlaces} places to stay in Amsterdam</b>
+              <b className="places__found">{places.length} places to stay in {currentLocation}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -99,8 +102,14 @@ const MainScreen = ({countPlaces, places}) => {
 };
 
 MainScreen.propTypes = {
-  countPlaces: PropTypes.number.isRequired,
   places: PropTypes.array.isRequired,
+  currentLocation: PropTypes.string.isRequired
 };
 
-export default MainScreen;
+const mapStateToProps = (state) => ({
+  currentLocation: state.currentLocation,
+  places: getPlacesByCurrentLocation(state),
+});
+
+export {MainScreen};
+export default connect(mapStateToProps)(MainScreen);
