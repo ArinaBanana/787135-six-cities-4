@@ -66,7 +66,8 @@ const generatePlace = () => {
     isBookmark: getRandomBoolean(),
     city: {
       name: getRandomArrayItem(locations),
-      coordinates: {}
+      coordinates: [52.38333, 4.9],
+      zoom: 12
     }
   };
 };

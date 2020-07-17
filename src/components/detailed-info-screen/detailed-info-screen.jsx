@@ -175,13 +175,13 @@ class DetailedInfoScreen extends PureComponent {
               </div>
             </div>
             <section className="property__map map" >
-              <Map markers={placesForMap} height={`579px`} />
+              <Map markers={placesForMap} height={`579px`} city={place.city.coordinates} zoom={place.city.zoom} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <PlacesList places={nearPlaces} onTitleClick={() => {}} isNearList={true} />
+              <PlacesList places={nearPlaces} isNearList={true} />
             </section>
           </div>
         </main>
@@ -199,7 +199,8 @@ DetailedInfoScreen.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    isBookmark: PropTypes.bool.isRequired
+    isBookmark: PropTypes.bool.isRequired,
+    city: PropTypes.object.isRequired
   }),
   reviews: PropTypes.array.isRequired,
   nearPlaces: PropTypes.array.isRequired

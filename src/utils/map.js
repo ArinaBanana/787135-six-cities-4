@@ -1,5 +1,3 @@
-const CITY = [52.38333, 4.9];
-const ZOOM = 12;
 const TILES_URL = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
 
 const tileLayerOptions = {
@@ -7,4 +5,4 @@ const tileLayerOptions = {
 };
 const fitBoundsOptions = {padding: [7, 7]};
 
-export {CITY, ZOOM, TILES_URL, tileLayerOptions, fitBoundsOptions};
+export {TILES_URL, tileLayerOptions, fitBoundsOptions};

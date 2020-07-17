@@ -13,6 +13,23 @@ const MainScreen = ({countPlaces, places}) => {
     };
   });
 
+  const getPropsForMap = () => {
+    let zoom;
+    let city;
+
+    if (places.length) {
+      zoom = places[0].city.zoom;
+      city = places[0].city.coordinates;
+    } else {
+      zoom = 5;
+      city = [54.167728, 5.499037];
+    }
+
+    return {zoom, city};
+  };
+
+  const {zoom, city} = getPropsForMap();
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -71,7 +88,7 @@ const MainScreen = ({countPlaces, places}) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map markers={markers} height={`635px`} />
+                <Map markers={markers} height={`635px`} zoom={zoom} city={city} />
               </section>
             </div>
           </div>
