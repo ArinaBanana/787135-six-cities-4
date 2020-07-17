@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {CITY as city, ZOOM as zoom, TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/const";
+import {CITY as city, ZOOM as zoom, TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/map";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -16,7 +16,9 @@ class Map extends PureComponent {
     this._createMap();
     this._addTileLayer();
     this._renderMarkers();
-    this._fitBounds();
+    if (this.props.markers.length) {
+      this._fitBounds();
+    }
   }
 
   _getCoordinates() {
