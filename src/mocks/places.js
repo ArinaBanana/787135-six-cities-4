@@ -32,6 +32,8 @@ const coordinates = [
   [52.3809553943508, 4.939309666406198]
 ];
 
+const locations = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
 const makeCoordinatesGenerator = () => {
   const randomIndex = getRandomNumber(0, coordinates.length);
   const item = coordinates[randomIndex];
@@ -63,7 +65,7 @@ const generatePlace = () => {
     isPremium: getRandomBoolean(),
     isBookmark: getRandomBoolean(),
     city: {
-      name: `Amsterdam`,
+      name: getRandomArrayItem(locations),
       coordinates: {}
     }
   };
@@ -75,4 +77,4 @@ const generatePlaces = () => {
     .map(generatePlace);
 };
 
-export {generatePlaces};
+export {generatePlaces, locations};
