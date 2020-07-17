@@ -4,7 +4,7 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import LocationList from "../location-list/location-list.jsx";
 
-const MainScreen = ({countPlaces, places, onTitleClick}) => {
+const MainScreen = ({countPlaces, places}) => {
   const markers = places.map((place) => {
     return {
       id: place.id,
@@ -66,7 +66,7 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
                 </ul>
               </form>
 
-              <PlacesList places={places} onTitleClick={onTitleClick} isNearList={false} />
+              <PlacesList places={places} isNearList={false} />
 
             </section>
             <div className="cities__right-section">
@@ -84,7 +84,6 @@ const MainScreen = ({countPlaces, places, onTitleClick}) => {
 MainScreen.propTypes = {
   countPlaces: PropTypes.number.isRequired,
   places: PropTypes.array.isRequired,
-  onTitleClick: PropTypes.func.isRequired
 };
 
 export default MainScreen;

@@ -1,19 +1,15 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import {Link} from "react-router-dom";
+
+import {getUrlByPlace} from "../../utils/url";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
-  }
-
-  handleClick() {
-    const {onTitleClick, place} = this.props;
-
-    return onTitleClick(place);
   }
 
   handleMouseMove() {
@@ -56,8 +52,8 @@ class PlaceCard extends PureComponent {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name" onClick={this.handleClick}>
-            <a href="#">{place.title}</a>
+          <h2 className="place-card__name">
+            <Link to={getUrlByPlace(place)}>{place.title}</Link>
           </h2>
           <p className="place-card__type">{place.type}</p>
         </div>
@@ -67,7 +63,6 @@ class PlaceCard extends PureComponent {
 }
 
 PlaceCard.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
   onMouseMove: PropTypes.func.isRequired,
   place: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -77,7 +72,7 @@ PlaceCard.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    isBookmark: PropTypes.bool.isRequired
+    isBookmark: PropTypes.bool.isRequired,
   })
 };
 
