@@ -1,29 +1,29 @@
 import React, {Component} from "react";
-import Location from "../location/location.jsx";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/actions/location";
 
-const locations = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+import Location from "../location/location.jsx";
 
 class LocationList extends Component {
   constructor(props) {
     super(props);
-
-    this._activeCity = `Amsterdam`;
-
-    this._handleTitleClick = this._handleTitleClick.bind(this);
-  }
-
-  _handleTitleClick(city) {
-    this._activeCity = city;
   }
 
   render() {
+    const {locations, currentLocation, onTitleClick} = this.props;
+
     return (
       <ul className="locations__list tabs__list">
         {
           locations.map((location, index) => {
-            const isActive = location === this._activeCity;
+            const isActive = location === currentLocation;
 
-            return <Location key={`${index}-${location}`} city={location} isActive={isActive} onTitleClick={this._handleTitleClick} />;
+            return <Location
+              key={`${index}-${location}`}
+              city={location}
+              isActive={isActive}
+              onTitleClick={onTitleClick} />;
           })
         }
       </ul>
@@ -31,4 +31,22 @@ class LocationList extends Component {
   }
 }
 
-export default LocationList;
+const mapStateToProps = (state) => ({
+  locations: state.locations,
+  currentLocation: state.currentLocation
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTitleClick(city) {
+    dispatch(ActionCreator.setLocation(city));
+  }
+});
+
+LocationList.propTypes = {
+  locations: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  currentLocation: PropTypes.string.isRequired,
+  onTitleClick: PropTypes.func.isRequired
+};
+
+export {LocationList};
+export default connect(mapStateToProps, mapDispatchToProps)(LocationList);

@@ -1,9 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import {connect} from "react-redux";
+
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import {getPlacesWithIcons} from "../../store/selectors/places";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -11,9 +14,9 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   _getPlacesForMap() {
-    const {nearPlaces, place} = this.props;
-
+    const {place, nearPlaces} = this.props;
     const placesForMap = nearPlaces.slice();
+
     placesForMap.push(place);
     return placesForMap;
   }
@@ -202,4 +205,15 @@ DetailedInfoScreen.propTypes = {
   nearPlaces: PropTypes.array.isRequired
 };
 
-export default DetailedInfoScreen;
+const mapStateToProps = (state, ownProps) => {
+  const {activePlace, nearPlaces} = getPlacesWithIcons(state, ownProps);
+
+  return {
+    place: activePlace,
+    nearPlaces,
+    reviews: state.reviews
+  };
+};
+
+export {DetailedInfoScreen};
+export default connect(mapStateToProps)(DetailedInfoScreen);
