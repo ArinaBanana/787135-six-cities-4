@@ -31,7 +31,7 @@ class Screens extends PureComponent {
 }
 
 Screens.propTypes = {
-  match: PropTypes.object.isRequired,
+  match: PropTypes.object,
   getPlaces: PropTypes.func.isRequired,
 };
 
@@ -39,4 +39,5 @@ const mapDispatchToProps = {
   getPlaces: PlacesActionCreators.setPlaces,
 };
 
+export {Screens};
 export default connect(null, mapDispatchToProps)(Screens);

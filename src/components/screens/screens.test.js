@@ -1,8 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ScreensWithRouter from "./screensWithRouter";
-import Screens from "./screens";
 import {MemoryRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {Screens} from "./screens";
+
+const mockStore = configureStore([]);
 
 const places = [
   {
@@ -14,7 +17,12 @@ const places = [
     rating: `20%`,
     isPremium: false,
     isBookmark: true,
-    coordinates: [52.3909553943508, 4.85309666406198]
+    coordinates: [52.3909553943508, 4.85309666406198],
+    city: {
+      name: `City`,
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    }
   },
   {
     id: 9,
@@ -25,7 +33,12 @@ const places = [
     rating: `80%`,
     isPremium: true,
     isBookmark: true,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3809553943508, 4.939309666406198],
+    city: {
+      name: `City`,
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    }
   }
 ];
 
@@ -41,26 +54,48 @@ const reviews = [
 
 describe(`Screens snapshots`, () => {
   it(`Should render main screen`, () => {
-    const tree = renderer.create(<MemoryRouter initialEntries={[`/`]}>
-      <ScreensWithRouter countPlaces={67} places={places} reviews={reviews} />
-    </MemoryRouter>, {createNodeMock: () => {
-      return document.createElement(`div`);
-    }}).toJSON();
+    const store = mockStore({
+      currentLocation: `Amsterdam`,
+      locations: [`Amsterdam`, `Paris`],
+      places,
+    });
+
+    const tree = renderer.create(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={[`/`]}>
+            <Screens getPlaces={() => {}} />
+          </MemoryRouter>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
 
   it(`Should render detail info screen`, () => {
-    const component = renderer.create(<MemoryRouter initialEntries={[`/`]}>
-      <ScreensWithRouter countPlaces={67} places={places} reviews={reviews} />
-    </MemoryRouter>, {createNodeMock: () => {
-      return document.createElement(`div`);
-    }});
+    const store = mockStore({
+      currentLocation: `Amsterdam`,
+      locations: [`Amsterdam`, `Paris`],
+      places,
+      reviews
+    });
 
-    const instance = component.root.findByType(Screens).instance;
-    instance._handlePlaceClick(places[0]);
-
-    const tree = component.toJSON();
+    const tree = renderer.create(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={[`/place/7`]}>
+            <Screens getPlaces={() => {}} />
+          </MemoryRouter>
+        </Provider>,
+        {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
