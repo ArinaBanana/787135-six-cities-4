@@ -1,6 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import React from "react";
+import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import App from "./app.jsx";
 
 const places = [
   {
@@ -12,10 +14,15 @@ const places = [
     rating: `20%`,
     isPremium: false,
     isBookmark: true,
-    coordinates: [52.3909553943508, 4.85309666406198]
+    coordinates: [52.3909553943508, 4.85309666406198],
+    city: {
+      name: `City`,
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    }
   },
   {
-    id: 9,
+    id: 8,
     title: `Foo`,
     price: 80,
     img: `path`,
@@ -23,7 +30,12 @@ const places = [
     rating: `80%`,
     isPremium: true,
     isBookmark: true,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3809553943508, 4.939309666406198],
+    city: {
+      name: `City`,
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    }
   }
 ];
 
@@ -37,10 +49,25 @@ const reviews = [
   }
 ];
 
+const mockStore = configureStore([]);
+
 it(`Should render App`, () => {
-  const tree = renderer.create(<App countPlaces={312} places={places} reviews={reviews} />, {createNodeMock: () => {
-    return document.createElement(`div`);
-  }}
+  const store = mockStore({
+    places,
+    reviews,
+    currentLocation: `Amsterdam`,
+    locations: [`Amsterdam`, `Paris`],
+  });
+
+  const tree = renderer.create(
+      <Provider store={store}>
+        <App countPlaces={312} places={places} reviews={reviews} />
+      </Provider>,
+      {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        }
+      }
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
