@@ -7,6 +7,7 @@ import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import {getPlacesWithIcons} from "../../store/selectors/places";
+import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -21,9 +22,18 @@ class DetailedInfoScreen extends PureComponent {
     return placesForMap;
   }
 
+  componentDidMount() {
+    const {getReviews} = this.props;
+    getReviews();
+  }
+
   render() {
     const {place, reviews, nearPlaces} = this.props;
     const placesForMap = this._getPlacesForMap();
+
+    if (!place) {
+      return null;
+    }
 
     return (
       <div className="page">
@@ -203,7 +213,8 @@ DetailedInfoScreen.propTypes = {
     city: PropTypes.object.isRequired
   }),
   reviews: PropTypes.array.isRequired,
-  nearPlaces: PropTypes.array.isRequired
+  nearPlaces: PropTypes.array.isRequired,
+  getReviews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -216,5 +227,9 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = {
+  getReviews: ReviewsActionCreators.setReviews
+};
+
 export {DetailedInfoScreen};
-export default connect(mapStateToProps)(DetailedInfoScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedInfoScreen);
