@@ -84,10 +84,10 @@ exports[`Should render Place Card 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[Function]}
     >
       <a
-        href="#"
+        href="/place/7"
+        onClick={[Function]}
       >
         Foo bar
       </a>
