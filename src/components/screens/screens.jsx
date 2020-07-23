@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 
-import MainScreen from "../main-screen/main-screen.jsx";
-import DetailedInfoScreen from "../detailed-info-screen/detailed-info-screen.jsx";
+import MainScreen from "../main-screen/import-component";
+import DetailedInfoScreen from "../detailed-info-screen/import-component";
 import {PLACE} from "../../utils/url";
 import {ActionCreator as PlacesActionCreators} from "../../store/actions/places";
 

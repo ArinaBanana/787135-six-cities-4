@@ -7,7 +7,7 @@ import Map from "../map/map.jsx";
 import LocationList from "../location-list/location-list.jsx";
 import {getPlacesByCurrentLocation} from "../../store/selectors/places";
 
-const MainScreen = ({places, currentLocation}) => {
+const MainScreen = ({places, currentLocation, setActiveElement}) => {
   const markers = places.map((place) => {
     return {
       id: place.id,
@@ -86,7 +86,7 @@ const MainScreen = ({places, currentLocation}) => {
                 </ul>
               </form>
 
-              <PlacesList places={places} isNearList={false} />
+              <PlacesList places={places} isNearList={false} setActiveElement={setActiveElement} />
 
             </section>
             <div className="cities__right-section">
@@ -103,7 +103,8 @@ const MainScreen = ({places, currentLocation}) => {
 
 MainScreen.propTypes = {
   places: PropTypes.array.isRequired,
-  currentLocation: PropTypes.string.isRequired
+  currentLocation: PropTypes.string.isRequired,
+  setActiveElement: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

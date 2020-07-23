@@ -28,7 +28,7 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   render() {
-    const {place, reviews, nearPlaces} = this.props;
+    const {place, reviews, nearPlaces, setActiveElement} = this.props;
     const placesForMap = this._getPlacesForMap();
 
     if (!place) {
@@ -191,7 +191,7 @@ class DetailedInfoScreen extends PureComponent {
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <PlacesList places={nearPlaces} isNearList={true} />
+              <PlacesList places={nearPlaces} isNearList={true} setActiveElement={setActiveElement} />
             </section>
           </div>
         </main>
@@ -214,7 +214,8 @@ DetailedInfoScreen.propTypes = {
   }),
   reviews: PropTypes.array.isRequired,
   nearPlaces: PropTypes.array.isRequired,
-  getReviews: PropTypes.func.isRequired
+  getReviews: PropTypes.func.isRequired,
+  setActiveElement: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
