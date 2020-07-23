@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
-import Screens from "../screens/importComponent";
+import Screens from "../screens/import-component";
 
 function App() {
   return (
