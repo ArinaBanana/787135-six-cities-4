@@ -7,25 +7,7 @@ class PlacesList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: -1
-    };
-
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-
-    this.throttledHandleMouseMove = throttle(this.handleMouseMove, 200);
-  }
-
-  handleMouseMove(placeId) {
-    const {activeCard} = this.state;
-
-    if (activeCard === placeId) {
-      return;
-    }
-
-    this.setState({
-      activeCard: placeId
-    });
+    this.throttledHandleMouseMove = throttle(this.props.setActiveElement, 200);
   }
 
   render() {
@@ -47,7 +29,8 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object),
-  isNearList: PropTypes.bool.isRequired
+  isNearList: PropTypes.bool.isRequired,
+  setActiveElement: PropTypes.func.isRequired
 };
 
 export default PlacesList;
