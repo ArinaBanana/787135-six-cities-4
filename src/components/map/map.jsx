@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {CITY as city, ZOOM as zoom, TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/const";
+import {TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/map";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -16,7 +16,10 @@ class Map extends PureComponent {
     this._createMap();
     this._addTileLayer();
     this._renderMarkers();
-    this._fitBounds();
+
+    if (this.props.markers.length) {
+      this._fitBounds();
+    }
   }
 
   _getCoordinates() {
@@ -32,6 +35,8 @@ class Map extends PureComponent {
   }
 
   _createMap() {
+    const {city, zoom} = this.props;
+
     this._map = leaflet.map(this._mapContainerRef.current, {
       center: city,
       zoom,
@@ -49,13 +54,18 @@ class Map extends PureComponent {
   _renderMarkers() {
     const {markers} = this.props;
 
-    markers.forEach((marker) => this._renderMarker(marker));
+    this._layers = [];
+
+    markers.forEach((marker) => {
+      const layer = this._renderMarker(marker);
+      this._layers.push(layer);
+    });
   }
 
   _renderMarker(marker) {
     const icon = this._getIconPin(marker.iconUrl);
 
-    leaflet
+    return leaflet
       .marker(marker.coordinates, {icon})
       .addTo(this._map);
   }
@@ -68,6 +78,15 @@ class Map extends PureComponent {
 
   componentDidMount() {
     this._configureLeafletMap();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city && prevProps.zoom !== this.props.city && this.props.zoom) {
+      this._map.setView(this.props.city, this.props.zoom);
+      this._layers.forEach((layer) => layer.remove());
+
+      this._renderMarkers();
+    }
   }
 
   render() {
@@ -84,11 +103,13 @@ Map.propTypes = {
     coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
     iconUrl: PropTypes.string.isRequired
   })),
-  height: PropTypes.string.isRequired
+  height: PropTypes.string.isRequired,
+  city: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  zoom: PropTypes.number.isRequired
 };
 
 Map.defaultProps = {
-  markers: [],
+  markers: []
 };
 
 export default Map;

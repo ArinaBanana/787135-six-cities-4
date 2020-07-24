@@ -1,9 +1,13 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
+import {connect} from "react-redux";
+
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import {getPlacesWithIcons} from "../../store/selectors/places";
+import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -11,16 +15,25 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   _getPlacesForMap() {
-    const {nearPlaces, place} = this.props;
-
+    const {place, nearPlaces} = this.props;
     const placesForMap = nearPlaces.slice();
+
     placesForMap.push(place);
     return placesForMap;
+  }
+
+  componentDidMount() {
+    const {getReviews} = this.props;
+    getReviews();
   }
 
   render() {
     const {place, reviews, nearPlaces} = this.props;
     const placesForMap = this._getPlacesForMap();
+
+    if (!place) {
+      return null;
+    }
 
     return (
       <div className="page">
@@ -29,7 +42,7 @@ class DetailedInfoScreen extends PureComponent {
             <div className="header__wrapper">
               <div className="header__left">
                 <a className="header__logo-link">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+                  <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
                 </a>
               </div>
               <nav className="header__nav">
@@ -52,22 +65,22 @@ class DetailedInfoScreen extends PureComponent {
             <div className="property__gallery-container container">
               <div className="property__gallery">
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/room.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/room.jpg" alt="Photo studio" />
                 </div>
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/apartment-01.jpg" alt="Photo studio" />
                 </div>
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/apartment-02.jpg" alt="Photo studio" />
                 </div>
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/apartment-03.jpg" alt="Photo studio" />
                 </div>
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/studio-01.jpg" alt="Photo studio" />
                 </div>
                 <div className="property__image-wrapper">
-                  <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
+                  <img className="property__image" src="/img/apartment-01.jpg" alt="Photo studio" />
                 </div>
               </div>
             </div>
@@ -150,7 +163,7 @@ class DetailedInfoScreen extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src="/img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
                       Angelina
@@ -172,13 +185,13 @@ class DetailedInfoScreen extends PureComponent {
               </div>
             </div>
             <section className="property__map map" >
-              <Map markers={placesForMap} height={`579px`} />
+              <Map markers={placesForMap} height={`579px`} city={place.city.coordinates} zoom={place.city.zoom} />
             </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <PlacesList places={nearPlaces} onTitleClick={() => {}} isNearList={true} />
+              <PlacesList places={nearPlaces} isNearList={true} />
             </section>
           </div>
         </main>
@@ -196,10 +209,27 @@ DetailedInfoScreen.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    isBookmark: PropTypes.bool.isRequired
+    isBookmark: PropTypes.bool.isRequired,
+    city: PropTypes.object.isRequired
   }),
   reviews: PropTypes.array.isRequired,
-  nearPlaces: PropTypes.array.isRequired
+  nearPlaces: PropTypes.array.isRequired,
+  getReviews: PropTypes.func.isRequired
 };
 
-export default DetailedInfoScreen;
+const mapStateToProps = (state, ownProps) => {
+  const {activePlace, nearPlaces} = getPlacesWithIcons(state, ownProps);
+
+  return {
+    place: activePlace,
+    nearPlaces,
+    reviews: state.reviews
+  };
+};
+
+const mapDispatchToProps = {
+  getReviews: ReviewsActionCreators.setReviews
+};
+
+export {DetailedInfoScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedInfoScreen);

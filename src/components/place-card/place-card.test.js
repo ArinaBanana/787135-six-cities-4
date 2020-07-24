@@ -1,5 +1,7 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
+import {MemoryRouter} from "react-router-dom";
+
 import PlaceCard from "./place-card";
 
 const place = {
@@ -14,7 +16,11 @@ const place = {
 };
 
 it(`Should render Place Card`, () => {
-  const tree = renderer.create(<PlaceCard place={place} onTitleClick={() => {}} onMouseMove={() => {}} />).toJSON();
+  const tree = renderer.create(
+      <MemoryRouter>
+        <PlaceCard place={place} onMouseMove={() => {}} />
+      </MemoryRouter>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

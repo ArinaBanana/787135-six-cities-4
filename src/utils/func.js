@@ -38,4 +38,8 @@ function throttle(func, ms) {
   return wrapper;
 }
 
-export {getRandomArrayItem, getRandomNumber, getRandomBoolean, throttle};
+const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export {getRandomArrayItem, getRandomNumber, getRandomBoolean, throttle, extend};

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import leaflet from "leaflet";
 import Map from "./map";
-import {TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/const";
+import {TILES_URL, tileLayerOptions, fitBoundsOptions} from "../../utils/map";
 
 jest.mock(`leaflet`, () => {
   const map = {
@@ -64,6 +64,10 @@ describe(`Check Map methods`, () => {
     const instance = {
       _mapContainerRef: {
         current: element
+      },
+      props: {
+        city: [52.38333, 4.9],
+        zoom: 10
       }
     };
     const map = leaflet.map();
@@ -159,7 +163,10 @@ describe(`Check Map methods`, () => {
       _createMap: jest.fn(() => executionOrders.push(1)),
       _addTileLayer: jest.fn(() => executionOrders.push(2)),
       _renderMarkers: jest.fn(() => executionOrders.push(3)),
-      _fitBounds: jest.fn(() => executionOrders.push(4))
+      _fitBounds: jest.fn(() => executionOrders.push(4)),
+      props: {
+        markers,
+      }
     };
 
     Map.prototype._configureLeafletMap.call(instance);
@@ -172,7 +179,7 @@ describe(`Check Map methods`, () => {
     spy.mockImplementation(() => {});
 
     const div = {};
-    renderer.create(<Map markers={markers} height={`600px`} />, {createNodeMock: () => {
+    renderer.create(<Map city={[52.38333, 4.9]} zoom={10} markers={markers} height={`600px`} />, {createNodeMock: () => {
       return div;
     }});
 

@@ -29,7 +29,7 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {places, onTitleClick, isNearList} = this.props;
+    const {places, isNearList} = this.props;
 
     return (
       <div className={isNearList ? `near-places__list places__list` : `cities__places-list places__list tabs__content`}>
@@ -37,7 +37,6 @@ class PlacesList extends PureComponent {
           places.map((place) => <PlaceCard
             key={place.id}
             place={place}
-            onTitleClick={onTitleClick}
             onMouseMove={this.throttledHandleMouseMove}
           />)
         }
@@ -48,7 +47,6 @@ class PlacesList extends PureComponent {
 
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object),
-  onTitleClick: PropTypes.func.isRequired,
   isNearList: PropTypes.bool.isRequired
 };
 

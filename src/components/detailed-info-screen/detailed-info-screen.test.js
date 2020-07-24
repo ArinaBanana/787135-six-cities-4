@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import DetailedInfoScreen from "./detailed-info-screen.jsx";
+
+const mockStore = configureStore([]);
 
 const places = [
   {
@@ -28,12 +32,24 @@ const reviews = [
 ];
 
 it(`Should render Detailed Info Screen`, () => {
-  const tree = renderer.create(<DetailedInfoScreen
-    place={places[0]}
-    reviews={reviews}
-    nearPlaces={places} />, {createNodeMock: () => {
-    return document.createElement(`div`);
-  }}).toJSON();
+  const store = mockStore({
+    place: places[0],
+    reviews,
+    places
+  });
+
+  const tree = renderer.create(
+      <Provider store={store}>
+        <DetailedInfoScreen
+          place={places[0]}
+          reviews={reviews}
+          nearPlaces={places}/>
+      </Provider>,
+      {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        }
+      }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

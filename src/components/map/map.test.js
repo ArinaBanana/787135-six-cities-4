@@ -14,7 +14,7 @@ const markers = [
 ];
 
 it(`Should render Map`, () => {
-  const tree = renderer.create(<Map markers={markers} height={`600px`} />, {createNodeMock: () => {
+  const tree = renderer.create(<Map markers={markers} height={`600px`} city={[52.38333, 4.9]} zoom={10} />, {createNodeMock: () => {
     return document.createElement(`div`);
   }}).toJSON();
 

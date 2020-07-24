@@ -12,10 +12,10 @@ const titles = [
 const prices = [80, 120, 132, 180];
 
 const imageSource = [
-  `img/apartment-01.jpg`,
-  `img/room.jpg`,
-  `img/apartment-02.jpg`,
-  `img/apartment-03.jpg`
+  `/img/apartment-01.jpg`,
+  `/img/room.jpg`,
+  `/img/apartment-02.jpg`,
+  `/img/apartment-03.jpg`
 ];
 
 const types = [
@@ -31,6 +31,8 @@ const coordinates = [
   [52.3909553943508, 4.929309666406198],
   [52.3809553943508, 4.939309666406198]
 ];
+
+const locations = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const makeCoordinatesGenerator = () => {
   const randomIndex = getRandomNumber(0, coordinates.length);
@@ -61,7 +63,12 @@ const generatePlace = () => {
     coordinates: makeCoordinatesGenerator(),
     rating: `${getRandomNumber(50, 100)}%`,
     isPremium: getRandomBoolean(),
-    isBookmark: getRandomBoolean()
+    isBookmark: getRandomBoolean(),
+    city: {
+      name: getRandomArrayItem(locations),
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    }
   };
 };
 
@@ -71,4 +78,4 @@ const generatePlaces = () => {
     .map(generatePlace);
 };
 
-export {generatePlaces};
+export {generatePlaces, locations};

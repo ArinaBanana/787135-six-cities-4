@@ -1,5 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {MemoryRouter} from "react-router-dom";
 import PlacesList from "./places-list";
 
 const places = [
@@ -26,7 +27,11 @@ const places = [
 ];
 
 it(`Should render Places List`, () => {
-  const tree = renderer.create(<PlacesList onTitleClick={() => {}} places={places} isNearList={false} />).toJSON();
+  const tree = renderer.create(
+      <MemoryRouter>
+        <PlacesList places={places} isNearList={false} />
+      </MemoryRouter>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
