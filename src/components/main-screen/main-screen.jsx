@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import LocationList from "../location-list/location-list.jsx";
 import PlacesContainer from "../places-container/places-container.jsx";
 import NoPlacesInCity from "../no-places-in-city/no-places-in-city.jsx";
+import getPlacesWithIconForMap from "../../utils/places";
 
 import {getPlacesByCurrentLocation} from "../../store/selectors/places";
 
@@ -23,15 +24,8 @@ class MainScreen extends PureComponent {
   }
 
   _getMarkers() {
-    const {places} = this.props;
-
-    return places.map((place) => {
-      return {
-        id: place.id,
-        coordinates: place.coordinates,
-        iconUrl: `img/pin.svg`
-      };
-    });
+    const {places, activeElement} = this.props;
+    return getPlacesWithIconForMap(places, activeElement);
   }
 
   _getZoomAndCity() {
@@ -63,7 +57,6 @@ class MainScreen extends PureComponent {
   }
 
   render() {
-
     return (
       <div className="page page--gray page--main">
         <header className="header">
@@ -108,7 +101,8 @@ class MainScreen extends PureComponent {
 MainScreen.propTypes = {
   places: PropTypes.array.isRequired,
   currentLocation: PropTypes.string.isRequired,
-  setActiveElement: PropTypes.func.isRequired
+  setActiveElement: PropTypes.func.isRequired,
+  activeElement: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({

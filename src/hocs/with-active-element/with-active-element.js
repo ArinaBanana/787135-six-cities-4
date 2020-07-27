@@ -25,10 +25,13 @@ const withActiveElement = (Component) => {
     }
 
     render() {
+      const {activeElement} = this.state;
+
       return (
         <Component
           {...this.props}
           setActiveElement={this.setActiveElement}
+          activeElement={activeElement}
         />
       );
     }

@@ -6,20 +6,22 @@ import {connect} from "react-redux";
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
-import {getPlacesWithIcons} from "../../store/selectors/places";
+import {getActivePlaceAndNearPlaces} from "../../store/selectors/places";
 import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._getPlaces = this._getPlaces.bind(this);
   }
 
-  _getPlacesForMap() {
+  _getPlaces() {
     const {place, nearPlaces} = this.props;
-    const placesForMap = nearPlaces.slice();
+    const places = nearPlaces.slice();
 
-    placesForMap.push(place);
-    return placesForMap;
+    places.push(place);
+    return places;
   }
 
   componentDidMount() {
@@ -29,7 +31,7 @@ class DetailedInfoScreen extends PureComponent {
 
   render() {
     const {place, reviews, nearPlaces, setActiveElement} = this.props;
-    const placesForMap = this._getPlacesForMap();
+    const placesForMap = this._getPlaces();
 
     if (!place) {
       return null;
@@ -219,7 +221,7 @@ DetailedInfoScreen.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {activePlace, nearPlaces} = getPlacesWithIcons(state, ownProps);
+  const {activePlace, nearPlaces} = getActivePlaceAndNearPlaces(state, ownProps);
 
   return {
     place: activePlace,
