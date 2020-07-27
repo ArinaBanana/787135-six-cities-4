@@ -43,7 +43,10 @@ it(`Should render Detailed Info Screen`, () => {
         <DetailedInfoScreen
           place={places[0]}
           reviews={reviews}
-          nearPlaces={places}/>
+          nearPlaces={places}
+          setActiveElement={() => {}}
+          getReviews={() => {}}
+        />
       </Provider>,
       {
         createNodeMock: () => {

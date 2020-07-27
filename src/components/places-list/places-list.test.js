@@ -29,7 +29,7 @@ const places = [
 it(`Should render Places List`, () => {
   const tree = renderer.create(
       <MemoryRouter>
-        <PlacesList places={places} isNearList={false} />
+        <PlacesList places={places} isNearList={false} setActiveElement={() => {}} />
       </MemoryRouter>
   ).toJSON();
 
