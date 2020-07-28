@@ -1,15 +1,13 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import {BrowserRouter} from "react-router-dom";
-import Screens from "../screens/importComponent";
+import Screens from "../screens/import-component";
 
-class App extends PureComponent {
-  render() {
-    return (
-      <BrowserRouter>
-        <Screens />
-      </BrowserRouter>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Screens/>
+    </BrowserRouter>
+  );
 }
 
 export default App;

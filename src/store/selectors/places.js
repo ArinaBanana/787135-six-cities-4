@@ -1,10 +1,11 @@
 import {createSelector} from "reselect";
 import {getLocation} from "./location";
+import getPlacesWithIconForMap from "../../utils/places";
 
 const getPlaces = (state) => state.places;
 const getCurrentPlaceId = (state, props) => props.placeId;
 
-const getPlacesWithIcons = createSelector(
+const getActivePlaceAndNearPlaces = createSelector(
     getPlaces,
     getCurrentPlaceId,
     (places, placeId) => {
@@ -16,13 +17,7 @@ const getPlacesWithIcons = createSelector(
         };
       }
 
-      const allPlaces = places.map((it) => {
-        const isActiveMarker = it.id === placeId;
-        const iconUrl = isActiveMarker ? `/img/pin-active.svg` : `/img/pin.svg`;
-
-        return Object.assign({}, ...[it], {iconUrl, isActiveMarker});
-      });
-
+      const allPlaces = getPlacesWithIconForMap(places, placeId);
       const activePlace = allPlaces.find((item) => item.isActiveMarker);
 
       // В этом месте фильтровать так же по условию "находятся рядом"
@@ -42,4 +37,4 @@ const getPlacesByCurrentLocation = createSelector(
     }
 );
 
-export {getPlacesWithIcons, getPlacesByCurrentLocation};
+export {getActivePlaceAndNearPlaces, getPlacesByCurrentLocation};
