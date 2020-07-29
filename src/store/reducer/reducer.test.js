@@ -1,7 +1,7 @@
 import {reducer, initialState} from "./reducer";
-import {ActionType as LocationActionType} from "./actions/location";
-import {ActionType as PlacesActionType} from "./actions/places";
-import {ActionType as ReviewsActionType} from "./actions/reviews";
+import {ActionType as LocationActionType} from "../actions/location";
+import {ActionType as PlacesActionType} from "../actions/places";
+import {ActionType as ReviewsActionType} from "../actions/reviews";
 
 describe(`Check reducer`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {

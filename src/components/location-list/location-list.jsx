@@ -32,8 +32,8 @@ class LocationList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  locations: state.locations,
-  currentLocation: state.currentLocation
+  locations: state.LOCATIONS.locations,
+  currentLocation: state.LOCATIONS.currentLocation
 });
 
 const mapDispatchToProps = (dispatch) => ({

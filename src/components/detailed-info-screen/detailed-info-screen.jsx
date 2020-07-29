@@ -226,7 +226,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     place: activePlace,
     nearPlaces,
-    reviews: state.reviews
+    reviews: state.REVIEWS.reviews
   };
 };
 

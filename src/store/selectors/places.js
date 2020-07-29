@@ -2,7 +2,7 @@ import {createSelector} from "reselect";
 import {getLocation} from "./location";
 import getPlacesWithIconForMap from "../../utils/places";
 
-const getPlaces = (state) => state.places;
+const getPlaces = (state) => state.PLACES.places;
 const getCurrentPlaceId = (state, props) => props.placeId;
 
 const getActivePlaceAndNearPlaces = createSelector(
