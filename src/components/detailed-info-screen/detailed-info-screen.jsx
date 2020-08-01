@@ -6,6 +6,10 @@ import {connect} from "react-redux";
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import PlaceGallery from "../place-gallery/place-gallery.jsx";
+import PlaceInsideList from "../place-inside-list/place-inside-list.jsx";
+import {getFloatNumberInPercent} from "../../utils/func";
+
 import {getActivePlaceAndNearPlaces} from "../../store/selectors/places";
 import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
 
@@ -37,6 +41,8 @@ class DetailedInfoScreen extends PureComponent {
       return null;
     }
 
+    const rating = getFloatNumberInPercent(place.rating);
+
     return (
       <div className="page">
         <header className="header">
@@ -65,26 +71,7 @@ class DetailedInfoScreen extends PureComponent {
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
-              <div className="property__gallery">
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/room.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/apartment-02.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/apartment-03.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/studio-01.jpg" alt="Photo studio" />
-                </div>
-                <div className="property__image-wrapper">
-                  <img className="property__image" src="/img/apartment-01.jpg" alt="Photo studio" />
-                </div>
-              </div>
+              <PlaceGallery images={place.allImages} />
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
@@ -106,20 +93,20 @@ class DetailedInfoScreen extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: place.rating}} />
+                    <span style={{width: `${rating}%`}} />
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">4.8</span>
+                  <span className="property__rating-value rating__value">{place.rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
                     {place.type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    3 Bedrooms
+                    {place.bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max 4 adults
+                    Max {place.adults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -128,57 +115,28 @@ class DetailedInfoScreen extends PureComponent {
                 </div>
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
-                  <ul className="property__inside-list">
-                    <li className="property__inside-item">
-                      Wi-Fi
-                    </li>
-                    <li className="property__inside-item">
-                      Washing machine
-                    </li>
-                    <li className="property__inside-item">
-                      Towels
-                    </li>
-                    <li className="property__inside-item">
-                      Heating
-                    </li>
-                    <li className="property__inside-item">
-                      Coffee machine
-                    </li>
-                    <li className="property__inside-item">
-                      Baby seat
-                    </li>
-                    <li className="property__inside-item">
-                      Kitchen
-                    </li>
-                    <li className="property__inside-item">
-                      Dishwasher
-                    </li>
-                    <li className="property__inside-item">
-                      Cabel TV
-                    </li>
-                    <li className="property__inside-item">
-                      Fridge
-                    </li>
-                  </ul>
+                  <PlaceInsideList items={place.goods} />
                 </div>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="/img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src={`/${place.host.avatar}`} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
-                      Angelina
+                      {place.host.name}
                     </span>
+                    {
+                      place.host.isPro ? <span className="property__user-status">Pro</span> : ``
+                    }
                   </div>
                   <div className="property__description">
+                    {/* TODO: поделить на два абзаца описание */}
                     <p className="property__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                      building is green and from 18th century.
+                      {place.description}
                     </p>
                     <p className="property__text">
-                      An independent House, strategically located between Rembrand Square and National Opera, but where
-                      the bustle of the city comes to rest in this alley flowery and colorful.
+                      {place.description}
                     </p>
                   </div>
                 </div>
@@ -209,10 +167,20 @@ DetailedInfoScreen.propTypes = {
     price: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired,
-    city: PropTypes.object.isRequired
+    city: PropTypes.object.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    allImages: PropTypes.array.isRequired,
+    goods: PropTypes.array.isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired
   }),
   reviews: PropTypes.array.isRequired,
   nearPlaces: PropTypes.array.isRequired,

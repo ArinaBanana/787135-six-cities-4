@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Place inside list 1`] = `
+<ul
+  className="property__inside-list"
+>
+  <li
+    className="property__inside-item"
+  >
+    WI-FI
+  </li>
+  <li
+    className="property__inside-item"
+  >
+    Breakfast
+  </li>
+</ul>
+`;

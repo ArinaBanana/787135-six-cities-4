@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Place image 1`] = `
+<div
+  className="property__image-wrapper"
+>
+  <img
+    alt="Photo studio"
+    className="property__image"
+    src="path"
+  />
+</div>
+`;
