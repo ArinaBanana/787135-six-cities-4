@@ -1,9 +1,8 @@
 import {extend} from "../../../utils/func";
 import {ActionType} from "../../actions/location";
-import {locations} from "../../../mocks/places";
 
 const initialState = {
-  locations,
+  locations: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
   currentLocation: `Amsterdam`
 };
 

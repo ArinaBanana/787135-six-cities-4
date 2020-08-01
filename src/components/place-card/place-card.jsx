@@ -4,6 +4,7 @@ import cn from "classnames";
 import {Link} from "react-router-dom";
 
 import {getUrlByPlace} from "../../utils/url";
+import {getFloatNumberInPercent} from "../../utils/func";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
@@ -20,6 +21,8 @@ class PlaceCard extends PureComponent {
 
   render() {
     const {place} = this.props;
+
+    const rating = getFloatNumberInPercent(place.rating);
 
     return (
       <article className="cities__place-card place-card" onMouseMove={this.handleMouseMove}>
@@ -48,7 +51,7 @@ class PlaceCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: place.rating}} />
+              <span style={{width: `${rating}%`}} />
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -70,7 +73,7 @@ PlaceCard.propTypes = {
     price: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired,
   })

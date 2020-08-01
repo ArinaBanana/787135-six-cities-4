@@ -15,7 +15,7 @@ const adaptPlaces = (places) => {
       type: place.type,
       coordinates: getArrayCoordinates(place.location.latitude, place.location.longitude),
       zoom: place.zoom,
-      rating: `${place.rating}`,
+      rating: place.rating,
       isPremium: place[`is_premium`],
       isBookmark: place[`is_favorite`],
       city: {
