@@ -32,4 +32,27 @@ function getFloatNumberInPercent(a, b = 5) {
   return 100 * a / b;
 }
 
-export {throttle, extend, getFloatNumberInPercent};
+function splitString(text) {
+  const punctuationMarks = /[.!?]/g;
+  const textWithFlags = text.replace(punctuationMarks, `$&SPLIT_HERE `);
+  const array = textWithFlags.split(/(\w[SPLIT_HERE]+)(\s)/);
+  const result = array.filter((item) => item !== ` ` && item !== `SPLIT_HERE` && item !== ``);
+
+  let firstParagraph;
+  let secondParagraph;
+
+  const quantity = result.length / 2;
+
+  if (result.length % 2 === 0) {
+    firstParagraph = result.slice(0, quantity);
+    secondParagraph = result.slice(quantity, result.length);
+  } else {
+    firstParagraph = result.slice(0, Math.floor(quantity));
+    secondParagraph = result.slice(Math.floor(quantity), result.length);
+
+  }
+
+  return {firstParagraph, secondParagraph};
+}
+
+export {throttle, extend, getFloatNumberInPercent, splitString};

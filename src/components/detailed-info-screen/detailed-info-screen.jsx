@@ -8,7 +8,7 @@ import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import PlaceGallery from "../place-gallery/place-gallery.jsx";
 import PlaceInsideList from "../place-inside-list/place-inside-list.jsx";
-import {getFloatNumberInPercent} from "../../utils/func";
+import {getFloatNumberInPercent, splitString} from "../../utils/func";
 
 import {getActivePlaceAndNearPlaces} from "../../store/selectors/places";
 import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
@@ -42,6 +42,8 @@ class DetailedInfoScreen extends PureComponent {
     }
 
     const rating = getFloatNumberInPercent(place.rating);
+
+    const {firstParagraph, secondParagraph} = splitString(place.description);
 
     return (
       <div className="page">
@@ -131,12 +133,11 @@ class DetailedInfoScreen extends PureComponent {
                     }
                   </div>
                   <div className="property__description">
-                    {/* TODO: поделить на два абзаца описание */}
                     <p className="property__text">
-                      {place.description}
+                      {firstParagraph}
                     </p>
                     <p className="property__text">
-                      {place.description}
+                      {secondParagraph}
                     </p>
                   </div>
                 </div>
