@@ -49,7 +49,7 @@ const ActionCreator = {
 };
 
 const Operation = {
-  setPlaces: () => (dispatch, getState, api) => {
+  loadPlaces: () => (dispatch, getState, api) => {
     return api.get(`/hotels`).then((response) => {
       const places = adaptPlaces(response.data);
 
