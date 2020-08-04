@@ -40,11 +40,15 @@ const adaptPlaces = (places) => {
 
 const ActionType = {
   SET_PLACES: `SET_PLACES`,
+  SET_NEAR_PLACES: `SET_NEAR_PLACES`
 };
 
 const ActionCreator = {
   setPlaces(places) {
     return {type: ActionType.SET_PLACES, payload: places};
+  },
+  setNearPlaces(places) {
+    return {type: ActionType.SET_NEAR_PLACES, payload: places};
   }
 };
 
@@ -54,6 +58,14 @@ const Operation = {
       const places = adaptPlaces(response.data);
 
       dispatch(ActionCreator.setPlaces(places));
+    });
+  },
+
+  loadNearPlaces: (placeId) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${placeId}/nearby`).then((response) => {
+      const places = adaptPlaces(response.data);
+
+      dispatch(ActionCreator.setNearPlaces(places));
     });
   }
 };

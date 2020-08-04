@@ -9,9 +9,11 @@ import PlacesList from "../places-list/places-list.jsx";
 import PlaceGallery from "../place-gallery/place-gallery.jsx";
 import PlaceInsideList from "../place-inside-list/place-inside-list.jsx";
 import {getFloatNumberInPercent, splitString} from "../../utils/func";
+import getPlacesWithIconForMap from "../../utils/places";
 
-import {getActivePlaceAndNearPlaces} from "../../store/selectors/places";
-import {Operation} from "../../store/actions/reviews";
+import {getActivePlace} from "../../store/selectors/places";
+import {Operation as ReviewsOperation} from "../../store/actions/reviews";
+import {Operation as PlacesOperation} from "../../store/actions/places";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -21,34 +23,36 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   _getPlaces() {
-    const {place, nearPlaces} = this.props;
+    const {place, nearPlaces, placeId} = this.props;
     const places = nearPlaces.slice();
-
     places.push(place);
-    return places;
+
+    return getPlacesWithIconForMap(places, placeId);
   }
 
   componentDidMount() {
-    const {getReviews, placeId} = this.props;
+    const {getReviews, getNearPlaces, placeId} = this.props;
     getReviews(placeId);
+    getNearPlaces(placeId);
   }
 
   componentDidUpdate(prevProps) {
-    const {getReviews, placeId} = this.props;
+    const {getReviews, getNearPlaces, placeId} = this.props;
 
     if (prevProps.placeId !== placeId) {
       getReviews(placeId);
+      getNearPlaces(placeId);
     }
   }
 
   render() {
     const {place, nearPlaces, setActiveElement} = this.props;
-    const placesForMap = this._getPlaces();
 
     if (!place) {
       return null;
     }
 
+    const placesForMap = this._getPlaces();
     const rating = getFloatNumberInPercent(place.rating);
     const {firstParagraph, secondParagraph} = splitString(place.description);
 
@@ -170,7 +174,6 @@ class DetailedInfoScreen extends PureComponent {
 DetailedInfoScreen.propTypes = {
   placeId: PropTypes.number.isRequired,
   place: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
@@ -192,20 +195,22 @@ DetailedInfoScreen.propTypes = {
   }),
   nearPlaces: PropTypes.array.isRequired,
   setActiveElement: PropTypes.func.isRequired,
-  getReviews: PropTypes.func.isRequired
+  getReviews: PropTypes.func.isRequired,
+  getNearPlaces: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {activePlace, nearPlaces} = getActivePlaceAndNearPlaces(state, ownProps);
+  const activePlace = getActivePlace(state, ownProps);
 
   return {
     place: activePlace,
-    nearPlaces,
+    nearPlaces: state.PLACES.nearPlaces
   };
 };
 
 const mapDispatchToProps = {
-  getReviews: Operation.loadReviews
+  getReviews: ReviewsOperation.loadReviews,
+  getNearPlaces: PlacesOperation.loadNearPlaces
 };
 
 export {DetailedInfoScreen};
