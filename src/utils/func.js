@@ -1,3 +1,6 @@
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
+
 function throttle(func, ms) {
   let isThrottled = false;
   let savedArgs;
@@ -49,10 +52,17 @@ function splitString(text) {
   } else {
     firstParagraph = result.slice(0, Math.floor(quantity));
     secondParagraph = result.slice(Math.floor(quantity), result.length);
-
   }
 
   return {firstParagraph, secondParagraph};
 }
 
-export {throttle, extend, getFloatNumberInPercent, splitString};
+function parseDate(dateInISO) {
+  const date = parseISO(dateInISO);
+  const month = format(date, `MMMM`);
+  const year = format(date, `yyyy`);
+
+  return `${month} ${year}`;
+}
+
+export {throttle, extend, getFloatNumberInPercent, splitString, parseDate};
