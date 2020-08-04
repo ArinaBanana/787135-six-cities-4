@@ -11,7 +11,7 @@ import PlaceInsideList from "../place-inside-list/place-inside-list.jsx";
 import {getFloatNumberInPercent, splitString} from "../../utils/func";
 
 import {getActivePlaceAndNearPlaces} from "../../store/selectors/places";
-import {ActionCreator as ReviewsActionCreators} from "../../store/actions/reviews";
+import {Operation} from "../../store/actions/reviews";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
@@ -29,12 +29,20 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   componentDidMount() {
-    const {getReviews} = this.props;
-    getReviews();
+    const {getReviews, placeId} = this.props;
+    getReviews(placeId);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {getReviews, placeId} = this.props;
+
+    if (prevProps.placeId !== placeId) {
+      getReviews(placeId);
+    }
   }
 
   render() {
-    const {place, reviews, nearPlaces, setActiveElement} = this.props;
+    const {place, nearPlaces, setActiveElement} = this.props;
     const placesForMap = this._getPlaces();
 
     if (!place) {
@@ -42,7 +50,6 @@ class DetailedInfoScreen extends PureComponent {
     }
 
     const rating = getFloatNumberInPercent(place.rating);
-
     const {firstParagraph, secondParagraph} = splitString(place.description);
 
     return (
@@ -141,8 +148,7 @@ class DetailedInfoScreen extends PureComponent {
                     </p>
                   </div>
                 </div>
-
-                <ReviewsContainer reviews={reviews} />
+                <ReviewsContainer />
               </div>
             </div>
             <section className="property__map map" >
@@ -162,6 +168,7 @@ class DetailedInfoScreen extends PureComponent {
 }
 
 DetailedInfoScreen.propTypes = {
+  placeId: PropTypes.number.isRequired,
   place: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -183,10 +190,9 @@ DetailedInfoScreen.propTypes = {
     }).isRequired,
     description: PropTypes.string.isRequired
   }),
-  reviews: PropTypes.array.isRequired,
   nearPlaces: PropTypes.array.isRequired,
-  getReviews: PropTypes.func.isRequired,
   setActiveElement: PropTypes.func.isRequired,
+  getReviews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -195,12 +201,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     place: activePlace,
     nearPlaces,
-    reviews: state.REVIEWS.reviews
   };
 };
 
 const mapDispatchToProps = {
-  getReviews: ReviewsActionCreators.setReviews
+  getReviews: Operation.loadReviews
 };
 
 export {DetailedInfoScreen};
