@@ -71,7 +71,7 @@ exports[`Should render Place Card 1`] = `
         <span
           style={
             Object {
-              "width": "20%",
+              "width": "70%",
             }
           }
         />

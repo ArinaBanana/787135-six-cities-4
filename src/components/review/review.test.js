@@ -5,9 +5,11 @@ import Review from "./review.jsx";
 const review = {
   id: 1,
   username: `Jon`,
-  rating: `70%`,
+  rating: 4,
   message: `message`,
   date: `date`,
+  userAvatar: `path`,
+  isPro: true,
 };
 
 it(`Should render Review`, () => {

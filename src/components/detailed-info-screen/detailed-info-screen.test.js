@@ -3,8 +3,15 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import DetailedInfoScreen from "./detailed-info-screen.jsx";
+import thunk from "redux-thunk";
 
-const mockStore = configureStore([]);
+const mockApi = {
+  get: jest.fn(() => Promise.resolve({
+    data: {}
+  })),
+};
+const middlewares = [thunk.withExtraArgument(mockApi)];
+const mockStore = configureStore(middlewares);
 
 const places = [
   {
@@ -13,11 +20,26 @@ const places = [
     price: 45,
     img: `path`,
     type: `apartment`,
-    rating: `20%`,
+    rating: 3.5,
     isPremium: false,
     isBookmark: true,
     iconUrl: `path`,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [52.3809553943508, 4.939309666406198],
+    city: {
+      name: `City`,
+      coordinates: [52.38333, 4.9],
+      zoom: 12
+    },
+    description: `Foo. Bar.`,
+    allImages: [`path`, `path`],
+    goods: [`Foo`, `Bar`],
+    host: {
+      avatar: `path`,
+      name: `Carry`,
+      isPro: false,
+    },
+    bedrooms: 3,
+    adults: 2,
   }
 ];
 
@@ -25,27 +47,35 @@ const reviews = [
   {
     id: 1,
     username: `Jon`,
-    rating: `70%`,
+    rating: 4,
     message: `message`,
     date: `date`,
+    userAvatar: `path`,
+    isPro: true,
   }
 ];
 
 it(`Should render Detailed Info Screen`, () => {
   const store = mockStore({
-    place: places[0],
-    reviews,
-    places
+    LOCATIONS: {
+      currentLocation: `Amsterdam`,
+      locations: [`Amsterdam`, `Paris`],
+    },
+    PLACES: {
+      nearPlaces: places,
+    }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
         <DetailedInfoScreen
+          placeId={7}
           place={places[0]}
           reviews={reviews}
           nearPlaces={places}
           setActiveElement={() => {}}
           getReviews={() => {}}
+          getNearPlaces={() => {}}
         />
       </Provider>,
       {

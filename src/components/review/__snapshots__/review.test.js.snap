@@ -14,7 +14,7 @@ exports[`Should render Review 1`] = `
         alt="Reviews avatar"
         className="reviews__avatar user__avatar"
         height="54"
-        src="/img/avatar-max.jpg"
+        src="path"
         width="54"
       />
     </div>
@@ -22,6 +22,11 @@ exports[`Should render Review 1`] = `
       className="reviews__user-name"
     >
       Jon
+    </span>
+    <span
+      className="property__user-status"
+    >
+      Pro
     </span>
   </div>
   <div
@@ -36,7 +41,7 @@ exports[`Should render Review 1`] = `
         <span
           style={
             Object {
-              "width": "70%",
+              "width": "80%",
             }
           }
         />
