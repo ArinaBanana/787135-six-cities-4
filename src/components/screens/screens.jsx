@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import MainScreen from "../main-screen/import-component";
 import DetailedInfoScreen from "../detailed-info-screen/import-component";
 import {PLACE} from "../../utils/url";
-import {ActionCreator as PlacesActionCreators} from "../../store/actions/places";
+import {Operation} from "../../store/actions/places";
 
 class Screens extends PureComponent {
   componentDidMount() {
@@ -36,7 +36,7 @@ Screens.propTypes = {
 };
 
 const mapDispatchToProps = {
-  getPlaces: PlacesActionCreators.setPlaces,
+  getPlaces: Operation.loadPlaces,
 };
 
 export {Screens};

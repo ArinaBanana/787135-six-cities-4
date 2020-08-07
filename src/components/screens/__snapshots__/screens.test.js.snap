@@ -74,7 +74,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="/img/room.jpg"
+              src="path"
             />
           </div>
           <div
@@ -83,43 +83,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             <img
               alt="Photo studio"
               className="property__image"
-              src="/img/apartment-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="/img/apartment-02.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="/img/apartment-03.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="/img/studio-01.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="/img/apartment-01.jpg"
+              src="path"
             />
           </div>
         </div>
@@ -168,7 +132,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
               <span
                 style={
                   Object {
-                    "width": "20%",
+                    "width": "70%",
                   }
                 }
               />
@@ -181,7 +145,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              4.8
+              3.5
             </span>
           </div>
           <ul
@@ -195,12 +159,15 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             <li
               className="property__feature property__feature--bedrooms"
             >
-              3 Bedrooms
+              3
+               Bedrooms
             </li>
             <li
               className="property__feature property__feature--adults"
             >
-              Max 4 adults
+              Max 
+              2
+               adults
             </li>
           </ul>
           <div
@@ -232,52 +199,12 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
               <li
                 className="property__inside-item"
               >
-                Wi-Fi
+                Foo
               </li>
               <li
                 className="property__inside-item"
               >
-                Washing machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Towels
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Heating
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Coffee machine
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Baby seat
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Kitchen
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Dishwasher
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Cabel TV
-              </li>
-              <li
-                className="property__inside-item"
-              >
-                Fridge
+                Bar
               </li>
             </ul>
           </div>
@@ -299,15 +226,16 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                   alt="Host avatar"
                   className="property__avatar user__avatar"
                   height="74"
-                  src="/img/avatar-angelina.jpg"
+                  src="/path"
                   width="74"
                 />
               </div>
               <span
                 className="property__user-name"
               >
-                Angelina
+                Carry
               </span>
+              
             </div>
             <div
               className="property__description"
@@ -315,12 +243,12 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
               <p
                 className="property__text"
               >
-                A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                Foo.
               </p>
               <p
                 className="property__text"
               >
-                An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                 Bar.
               </p>
             </div>
           </div>
@@ -353,7 +281,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                       alt="Reviews avatar"
                       className="reviews__avatar user__avatar"
                       height="54"
-                      src="/img/avatar-max.jpg"
+                      src="path"
                       width="54"
                     />
                   </div>
@@ -361,6 +289,11 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                     className="reviews__user-name"
                   >
                     Jon
+                  </span>
+                  <span
+                    className="property__user-status"
+                  >
+                    Pro
                   </span>
                 </div>
                 <div
@@ -375,7 +308,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                       <span
                         style={
                           Object {
-                            "width": "70%",
+                            "width": "80%",
                           }
                         }
                       />
@@ -593,6 +526,104 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             className="cities__place-card place-card"
             onMouseMove={[Function]}
           >
+            
+            <div
+              className="cities__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Place image"
+                  className="place-card__image"
+                  height="200"
+                  src="path"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    45
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button button"
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "60%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="/place/5"
+                  onClick={[Function]}
+                >
+                  Foo bar
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                apartment
+              </p>
+            </div>
+          </article>
+          <article
+            className="cities__place-card place-card"
+            onMouseMove={[Function]}
+          >
             <div
               className="place-card__mark"
             >
@@ -637,7 +668,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button button place-card__bookmark-button--active"
+                  className="place-card__bookmark-button button"
                   type="button"
                 >
                   <svg
@@ -665,7 +696,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "90%",
                       }
                     }
                   />
@@ -680,7 +711,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
                 className="place-card__name"
               >
                 <a
-                  href="/place/9"
+                  href="/place/6"
                   onClick={[Function]}
                 >
                   Foo

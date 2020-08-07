@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Place inside item 1`] = `
+<li
+  className="property__inside-item"
+>
+  WI-FI
+</li>
+`;

@@ -3,6 +3,15 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import MainScreen from "./main-screen";
+import thunk from "redux-thunk";
+
+const mockApi = {
+  get: jest.fn(() => Promise.resolve({
+    data: {}
+  })),
+};
+const middlewares = [thunk.withExtraArgument(mockApi)];
+const mockStore = configureStore(middlewares);
 
 const places = [
   {
@@ -39,13 +48,15 @@ const places = [
   }
 ];
 
-const mockStore = configureStore([]);
-
 it(`Should render Main Screen`, () => {
   const store = mockStore({
-    places,
-    currentLocation: `Amsterdam`,
-    locations: [`Amsterdam`, `Paris`],
+    LOCATIONS: {
+      currentLocation: `Amsterdam`,
+      locations: [`Amsterdam`, `Paris`],
+    },
+    PLACES: {
+      places,
+    },
   });
 
   const tree = renderer.create(

@@ -1,16 +1,5 @@
-const getRandomNumber = (min, max) => {
-  return min + Math.floor(Math.random() * (max - min));
-};
-
-const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomNumber(0, array.length);
-
-  return array[randomIndex];
-};
-
-const getRandomBoolean = () => {
-  return Boolean(getRandomNumber(0, 2));
-};
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 
 function throttle(func, ms) {
   let isThrottled = false;
@@ -38,8 +27,42 @@ function throttle(func, ms) {
   return wrapper;
 }
 
-const extend = (a, b) => {
+function extend(a, b) {
   return Object.assign({}, a, b);
-};
+}
 
-export {getRandomArrayItem, getRandomNumber, getRandomBoolean, throttle, extend};
+function getFloatNumberInPercent(a, b = 5) {
+  return 100 * a / b;
+}
+
+function splitString(text) {
+  const punctuationMarks = /[.!?]/g;
+  const textWithFlags = text.replace(punctuationMarks, `$&SPLIT_HERE `);
+  const array = textWithFlags.split(/(\w[SPLIT_HERE]+)(\s)/);
+  const result = array.filter((item) => item !== ` ` && item !== `SPLIT_HERE` && item !== ``);
+
+  let firstParagraph;
+  let secondParagraph;
+
+  const quantity = result.length / 2;
+
+  if (result.length % 2 === 0) {
+    firstParagraph = result.slice(0, quantity);
+    secondParagraph = result.slice(quantity, result.length);
+  } else {
+    firstParagraph = result.slice(0, Math.floor(quantity));
+    secondParagraph = result.slice(Math.floor(quantity), result.length);
+  }
+
+  return {firstParagraph, secondParagraph};
+}
+
+function parseDate(dateInISO) {
+  const date = parseISO(dateInISO);
+  const month = format(date, `MMMM`);
+  const year = format(date, `yyyy`);
+
+  return `${month} ${year}`;
+}
+
+export {throttle, extend, getFloatNumberInPercent, splitString, parseDate};

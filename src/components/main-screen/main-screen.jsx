@@ -106,7 +106,7 @@ MainScreen.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentLocation: state.currentLocation,
+  currentLocation: state.LOCATIONS.currentLocation,
   places: getPlacesByCurrentLocation(state),
 });
 

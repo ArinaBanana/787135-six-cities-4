@@ -146,7 +146,7 @@ exports[`Should render Places container 1`] = `
               <span
                 style={
                   Object {
-                    "width": "20%",
+                    "width": "70%",
                   }
                 }
               />

@@ -10,7 +10,7 @@ const places = [
     price: 45,
     img: `path`,
     type: `apartment`,
-    rating: `20%`,
+    rating: 3.5,
     isPremium: false,
     isBookmark: true
   },
@@ -20,7 +20,7 @@ const places = [
     price: 80,
     img: `path`,
     type: `room`,
-    rating: `80%`,
+    rating: 4,
     isPremium: true,
     isBookmark: true
   }

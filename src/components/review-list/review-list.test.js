@@ -6,9 +6,11 @@ const reviews = [
   {
     id: 1,
     username: `Jon`,
-    rating: `70%`,
+    rating: 4,
     message: `message`,
     date: `date`,
+    userAvatar: `path`,
+    isPro: true,
   }
 ];
 

@@ -3,6 +3,15 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import App from "./app.jsx";
+import thunk from "redux-thunk";
+
+const mockApi = {
+  get: jest.fn(() => Promise.resolve({
+    data: {}
+  })),
+};
+const middlewares = [thunk.withExtraArgument(mockApi)];
+const mockStore = configureStore(middlewares);
 
 const places = [
   {
@@ -38,7 +47,6 @@ const places = [
     }
   }
 ];
-
 const reviews = [
   {
     id: 1,
@@ -49,19 +57,23 @@ const reviews = [
   }
 ];
 
-const mockStore = configureStore([]);
-
 it(`Should render App`, () => {
   const store = mockStore({
-    places,
-    reviews,
-    currentLocation: `Amsterdam`,
-    locations: [`Amsterdam`, `Paris`],
+    LOCATIONS: {
+      currentLocation: `Amsterdam`,
+      locations: [`Amsterdam`, `Paris`],
+    },
+    PLACES: {
+      places,
+    },
+    REVIEWS: {
+      reviews
+    }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <App countPlaces={312} places={places} reviews={reviews} />
+        <App />
       </Provider>,
       {
         createNodeMock: () => {

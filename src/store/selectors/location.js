@@ -1,3 +1,3 @@
-const getLocation = (state) => state.currentLocation;
+const getLocation = (state) => state.LOCATIONS.currentLocation;
 
 export {getLocation};
