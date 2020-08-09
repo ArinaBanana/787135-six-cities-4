@@ -12,7 +12,7 @@ function LinkUser({email}) {
 }
 
 LinkUser.propTypes = {
-  email: PropTypes.string
+  email: PropTypes.string.isRequired
 };
 
 export default LinkUser;
