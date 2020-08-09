@@ -1,5 +1,7 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {getUrlByMainRoute} from "../../utils/url";
 
 class AuthScreen extends PureComponent {
   constructor(props) {
@@ -29,10 +31,9 @@ class AuthScreen extends PureComponent {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                {/* TODO компонент Link с переходом на главную страницу ? */}
-                <a className="header__logo-link">
+                <Link to={getUrlByMainRoute()} className="header__logo-link">
                   <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
