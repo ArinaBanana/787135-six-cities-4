@@ -61,7 +61,13 @@ it(`Should render Main Screen`, () => {
 
   const tree = renderer.create(
       <Provider store={store}>
-        <MainScreen places={places} currentLocation={`Amsterdam`} setActiveElement={() => {}} activeElement={7} />
+        <MainScreen
+          places={places}
+          currentLocation={`Amsterdam`}
+          setActiveElement={() => {}}
+          activeElement={7}
+          isAuth={false}
+        />
       </Provider>,
       {
         createNodeMock: () => {

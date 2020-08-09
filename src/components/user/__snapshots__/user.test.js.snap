@@ -33,7 +33,9 @@ exports[`Should render User Should render User with true isAuth 1`] = `
     />
     <span
       className="header__user-name user__name"
-    />
+    >
+      email
+    </span>
   </a>
 </li>
 `;

@@ -10,7 +10,7 @@ describe(`Should render User`, () => {
   });
 
   it(`Should render User with true isAuth`, () => {
-    const tree = renderer.create(<User isAuth={true}/>).toJSON();
+    const tree = renderer.create(<User email={`email`} isAuth={true}/>).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
