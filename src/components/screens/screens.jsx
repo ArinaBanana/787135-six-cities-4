@@ -24,7 +24,7 @@ class Screens extends PureComponent {
     return (
       <Switch>
         <Route exact path="/">
-          <MainScreen/>
+          <MainScreen isAuth={false}/>
         </Route>
         <Route exact path={`${PLACE}:id`} render={(props) => {
           const placeId = Number(props.match.params.id);
