@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 import MainScreen from "../main-screen/import-component";
 import DetailedInfoScreen from "../detailed-info-screen/import-component";
-import AuthScreen from "../sign-in/auth-screen.jsx";
+import AuthScreen from "../auth-screen/auth-screen.jsx";
 
 import {PLACE} from "../../utils/url";
 import {Operation as PlacesOperation} from "../../store/actions/places";
