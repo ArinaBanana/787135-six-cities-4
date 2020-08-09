@@ -4,4 +4,12 @@ const getUrlByPlace = (place) => {
   return `${PLACE}${place.id}`;
 };
 
-export {PLACE, getUrlByPlace};
+const getUrlByLogin = () => {
+  return `/login`;
+};
+
+const getUrlByMainRoute = () => {
+  return `/`;
+};
+
+export {PLACE, getUrlByPlace, getUrlByLogin, getUrlByMainRoute};

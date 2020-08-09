@@ -14,17 +14,31 @@ import {Operation as UserOperation} from "../../store/actions/user";
 import {getAuthorizationStatus} from "../../store/selectors/user";
 
 class Screens extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._isAuthorized = this._isAuthorized.bind(this);
+  }
+
+  _isAuthorized() {
+    const {authorizationStatus} = this.props;
+
+    return authorizationStatus === `AUTH`;
+  }
+
   componentDidMount() {
-    const {getPlaces, login} = this.props;
+    const {getPlaces} = this.props;
     getPlaces();
-    login({});
   }
 
   render() {
+    const {login} = this.props;
+    const isAuth = this._isAuthorized();
+
     return (
       <Switch>
         <Route exact path="/">
-          <MainScreen isAuth={false}/>
+          <MainScreen isAuth={isAuth}/>
         </Route>
         <Route exact path={`${PLACE}:id`} render={(props) => {
           const placeId = Number(props.match.params.id);
@@ -32,7 +46,7 @@ class Screens extends PureComponent {
         }}>
         </Route>
         <Route exact path={`/login`}>
-          <AuthScreen onSubmit={() => {}} />
+          <AuthScreen onSubmit={login} />
         </Route>
       </Switch>
     );
