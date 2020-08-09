@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import LocationList from "../location-list/location-list.jsx";
 import PlacesContainer from "../places-container/places-container.jsx";
 import NoPlacesInCity from "../no-places-in-city/no-places-in-city.jsx";
+import User from "../user/user.jsx";
+
 import getPlacesWithIconForMap from "../../utils/places";
 
 import {getPlacesByCurrentLocation} from "../../store/selectors/places";
@@ -69,13 +71,7 @@ class MainScreen extends PureComponent {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
+                  <User isAuth={this.props.isAuth} />
                 </ul>
               </nav>
             </div>
@@ -102,7 +98,8 @@ MainScreen.propTypes = {
   places: PropTypes.array.isRequired,
   currentLocation: PropTypes.string.isRequired,
   setActiveElement: PropTypes.func.isRequired,
-  activeElement: PropTypes.number.isRequired
+  activeElement: PropTypes.number.isRequired,
+  isAuth: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({

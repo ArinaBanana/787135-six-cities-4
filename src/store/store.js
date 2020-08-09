@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import {applyMiddleware} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {ActionCreator} from "./actions/user";
-import {AuthorizationStatus} from "./reducer/user/user"
+import {AuthorizationStatus} from "./reducer/user/user";
 
 import reducer from "./reducer/reducer";
 import createApi from "./../api";
