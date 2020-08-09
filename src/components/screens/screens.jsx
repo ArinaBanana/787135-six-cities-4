@@ -5,13 +5,19 @@ import {connect} from "react-redux";
 
 import MainScreen from "../main-screen/import-component";
 import DetailedInfoScreen from "../detailed-info-screen/import-component";
+import AuthScreen from "../sign-in/auth-screen.jsx";
+
 import {PLACE} from "../../utils/url";
-import {Operation} from "../../store/actions/places";
+import {Operation as PlacesOperation} from "../../store/actions/places";
+import {Operation as UserOperation} from "../../store/actions/user";
+
+import {getAuthorizationStatus} from "../../store/selectors/user";
 
 class Screens extends PureComponent {
   componentDidMount() {
-    const {getPlaces} = this.props;
+    const {getPlaces, login} = this.props;
     getPlaces();
+    login({});
   }
 
   render() {
@@ -25,6 +31,9 @@ class Screens extends PureComponent {
           return <DetailedInfoScreen placeId={placeId}/>;
         }}>
         </Route>
+        <Route exact path={`/login`}>
+          <AuthScreen onSubmit={() => {}} />
+        </Route>
       </Switch>
     );
   }
@@ -33,11 +42,18 @@ class Screens extends PureComponent {
 Screens.propTypes = {
   match: PropTypes.object,
   getPlaces: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state)
+});
+
 const mapDispatchToProps = {
-  getPlaces: Operation.loadPlaces,
+  getPlaces: PlacesOperation.loadPlaces,
+  login: UserOperation.login
 };
 
 export {Screens};
-export default connect(null, mapDispatchToProps)(Screens);
+export default connect(mapStateToProps, mapDispatchToProps)(Screens);
