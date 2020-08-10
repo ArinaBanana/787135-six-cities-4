@@ -2,6 +2,7 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {getUrlByMainRoute} from "../../utils/url";
+import history from "../../history/history";
 
 class AuthScreen extends PureComponent {
   constructor(props) {
@@ -22,6 +23,8 @@ class AuthScreen extends PureComponent {
       login: this.loginRef.current.value,
       password: this.passwordRef.current.value,
     });
+
+    history.push(`/`);
   }
 
   render() {

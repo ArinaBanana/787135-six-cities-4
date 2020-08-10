@@ -1,12 +1,13 @@
 import React from "react";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import Screens from "../screens/import-component";
+import history from "../../history/history";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Screens/>
-    </BrowserRouter>
+    </Router>
   );
 }
 
