@@ -145,13 +145,16 @@ describe(`Screens snapshots`, () => {
       },
       PLACES: {
         places,
+      },
+      USER: {
+        authorizationStatus: `NO_AUTH`
       }
     });
 
     const tree = renderer.create(
         <Provider store={store}>
           <MemoryRouter initialEntries={[`/`]}>
-            <Screens getPlaces={() => {}} />
+            <Screens authorizationStatus={`NO_AUTH`} getPlaces={() => {}} login={() => {}} />
           </MemoryRouter>
         </Provider>,
         {
@@ -176,13 +179,16 @@ describe(`Screens snapshots`, () => {
       },
       REVIEWS: {
         reviews
+      },
+      USER: {
+        authorizationStatus: `NO_AUTH`
       }
     });
 
     const tree = renderer.create(
         <Provider store={store}>
           <MemoryRouter initialEntries={[`/place/7`]}>
-            <Screens getPlaces={() => {}} />
+            <Screens authorizationStatus={`NO_AUTH`} getPlaces={() => {}} login={() => {}} />
           </MemoryRouter>
         </Provider>,
         {

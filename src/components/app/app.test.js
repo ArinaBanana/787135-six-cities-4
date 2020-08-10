@@ -9,6 +9,9 @@ const mockApi = {
   get: jest.fn(() => Promise.resolve({
     data: {}
   })),
+  post: jest.fn(() => Promise.resolve({
+    data: {}
+  })),
 };
 const middlewares = [thunk.withExtraArgument(mockApi)];
 const mockStore = configureStore(middlewares);
@@ -68,6 +71,9 @@ it(`Should render App`, () => {
     },
     REVIEWS: {
       reviews
+    },
+    USER: {
+      authorizationStatus: `NO_AUTH`
     }
   });
 
