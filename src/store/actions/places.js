@@ -40,7 +40,8 @@ const adaptPlaces = (places) => {
 
 const ActionType = {
   SET_PLACES: `SET_PLACES`,
-  SET_NEAR_PLACES: `SET_NEAR_PLACES`
+  SET_NEAR_PLACES: `SET_NEAR_PLACES`,
+  SET_FAVORITE_PLACES: `SET_FAVORITE_PLACES`,
 };
 
 const ActionCreator = {
@@ -49,6 +50,9 @@ const ActionCreator = {
   },
   setNearPlaces(places) {
     return {type: ActionType.SET_NEAR_PLACES, payload: places};
+  },
+  setFavoritePlaces(places) {
+    return {type: ActionType.SET_FAVORITE_PLACES, payload: places};
   }
 };
 
@@ -66,6 +70,14 @@ const Operation = {
       const places = adaptPlaces(response.data);
 
       dispatch(ActionCreator.setNearPlaces(places));
+    });
+  },
+
+  loadFavoritePlaces: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`).then((response) => {
+      const places = adaptPlaces(response.data);
+
+      dispatch(ActionCreator.setFavoritePlaces(places));
     });
   }
 };
