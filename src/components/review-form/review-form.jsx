@@ -1,9 +1,39 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, createRef} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {Operation} from "../../store/actions/reviews";
 
 class ReviewForm extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.formRef = createRef();
+
+    this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  _handleSubmit(evt) {
+    const {onSubmit, placeId} = this.props;
+
+    evt.preventDefault();
+
+    onSubmit(placeId, {
+      comment: this.formRef.current.review.value,
+      rating: this.formRef.current.rating.value
+    });
+
+    this.formRef.current.reset();
+  }
+
   render() {
     return (
-      <form className="reviews__form form" action="#" method="post">
+      <form
+        className="reviews__form form"
+        action="#"
+        method="post"
+        onSubmit={this._handleSubmit}
+        ref={this.formRef}
+      >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
@@ -41,7 +71,14 @@ class ReviewForm extends PureComponent {
             </svg>
           </label>
         </div>
-        <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" />
+
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="review"
+          placeholder="Tell how was your stay, what you like and what can be improved"
+        />
+
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and
@@ -54,4 +91,14 @@ class ReviewForm extends PureComponent {
   }
 }
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  placeId: PropTypes.number.isRequired
+};
+
+const mapDispatchToProps = {
+  onSubmit: Operation.postReview,
+};
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

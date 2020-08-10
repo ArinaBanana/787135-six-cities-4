@@ -148,7 +148,7 @@ class DetailedInfoScreen extends PureComponent {
                     </p>
                   </div>
                 </div>
-                <ReviewsContainer />
+                <ReviewsContainer placeId={this.props.placeId} />
               </div>
             </div>
             <section className="property__map map" >

@@ -2,7 +2,6 @@ import {parseDate} from "../../utils/func";
 
 const adaptReviews = (reviews) => {
   return reviews
-    .sort((a, b) => b.date - a.date)
     .map((review) => {
       return {
         id: review.id,
@@ -34,6 +33,18 @@ const Operation = {
 
       dispatch(ActionCreator.setReviews(reviews));
     });
+  },
+
+  postReview: (placeId, data) => (dispatch, getState, api) => {
+    return api.post(`/comments/${placeId}`, {
+      comment: data.comment,
+      rating: data.rating
+    })
+      .then((response) => {
+        const reviews = adaptReviews(response.data);
+
+        dispatch(ActionCreator.setReviews(reviews));
+      });
   }
 };
 
