@@ -77,7 +77,7 @@ exports[`Should render Reviews Container 1`] = `
           className="reviews__time"
           dateTime="2019-04-24"
         >
-          date
+          August 2020
         </time>
       </div>
     </li>
@@ -86,6 +86,7 @@ exports[`Should render Reviews Container 1`] = `
     action="#"
     className="reviews__form form"
     method="post"
+    onSubmit={[Function]}
   >
     <label
       className="reviews__label form__label"
@@ -98,8 +99,10 @@ exports[`Should render Reviews Container 1`] = `
     >
       <input
         className="form__rating-input visually-hidden"
+        disabled={false}
         id="5-stars"
         name="rating"
+        required={true}
         type="radio"
         value="5"
       />
@@ -120,8 +123,10 @@ exports[`Should render Reviews Container 1`] = `
       </label>
       <input
         className="form__rating-input visually-hidden"
+        disabled={false}
         id="4-stars"
         name="rating"
+        required={true}
         type="radio"
         value="4"
       />
@@ -142,8 +147,10 @@ exports[`Should render Reviews Container 1`] = `
       </label>
       <input
         className="form__rating-input visually-hidden"
+        disabled={false}
         id="3-stars"
         name="rating"
+        required={true}
         type="radio"
         value="3"
       />
@@ -164,8 +171,10 @@ exports[`Should render Reviews Container 1`] = `
       </label>
       <input
         className="form__rating-input visually-hidden"
+        disabled={false}
         id="2-stars"
         name="rating"
+        required={true}
         type="radio"
         value="2"
       />
@@ -186,8 +195,10 @@ exports[`Should render Reviews Container 1`] = `
       </label>
       <input
         className="form__rating-input visually-hidden"
+        disabled={false}
         id="1-star"
         name="rating"
+        required={true}
         type="radio"
         value="1"
       />
@@ -209,8 +220,12 @@ exports[`Should render Reviews Container 1`] = `
     </div>
     <textarea
       className="reviews__textarea form__textarea"
+      disabled={false}
       id="review"
+      maxLength={300}
+      minLength={50}
       name="review"
+      onChange={[Function]}
       placeholder="Tell how was your stay, what you like and what can be improved"
     />
     <div
@@ -235,7 +250,7 @@ exports[`Should render Reviews Container 1`] = `
       </p>
       <button
         className="reviews__submit form__submit button"
-        disabled=""
+        disabled={true}
         type="submit"
       >
         Submit

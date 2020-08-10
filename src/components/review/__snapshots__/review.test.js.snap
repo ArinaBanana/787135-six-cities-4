@@ -61,7 +61,7 @@ exports[`Should render Review 1`] = `
       className="reviews__time"
       dateTime="2019-04-24"
     >
-      date
+      August 2020
     </time>
   </div>
 </li>

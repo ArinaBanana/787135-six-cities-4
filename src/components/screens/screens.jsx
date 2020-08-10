@@ -11,8 +11,6 @@ import {PLACE} from "../../utils/url";
 import {Operation as PlacesOperation} from "../../store/actions/places";
 import {Operation as UserOperation} from "../../store/actions/user";
 
-import {getAuthorizationStatus} from "../../store/selectors/user";
-
 class Screens extends PureComponent {
   constructor(props) {
     super(props);
@@ -47,13 +45,8 @@ class Screens extends PureComponent {
 Screens.propTypes = {
   match: PropTypes.object,
   getPlaces: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
   login: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state)
-});
 
 const mapDispatchToProps = {
   getPlaces: PlacesOperation.loadPlaces,
@@ -61,4 +54,4 @@ const mapDispatchToProps = {
 };
 
 export {Screens};
-export default connect(mapStateToProps, mapDispatchToProps)(Screens);
+export default connect(null, mapDispatchToProps)(Screens);
