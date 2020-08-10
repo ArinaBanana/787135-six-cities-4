@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getFloatNumberInPercent} from "../../utils/func";
+import {getFloatNumberInPercent, parseDate} from "../../utils/func";
 
 function Review(props) {
   const {review} = props;
@@ -29,7 +29,7 @@ function Review(props) {
         <p className="reviews__text">
           {review.message}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
+        <time className="reviews__time" dateTime="2019-04-24">{parseDate(review.date)}</time>
       </div>
     </li>
   );

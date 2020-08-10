@@ -4,11 +4,11 @@ import {MemoryRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import {Screens} from "./screens";
+import {Screens} from "./screens.jsx";
 
 const mockApi = {
   get: jest.fn(() => Promise.resolve({
-    data: {}
+    data: []
   })),
 };
 const middlewares = [thunk.withExtraArgument(mockApi)];
@@ -130,7 +130,7 @@ const reviews = [
     username: `Jon`,
     rating: 4,
     message: `message`,
-    date: `date`,
+    date: `2020-08-10T11:39:43.926Z`,
     userAvatar: `path`,
     isPro: true,
   }
@@ -147,14 +147,16 @@ describe(`Screens snapshots`, () => {
         places,
       },
       USER: {
-        authorizationStatus: `NO_AUTH`
-      }
+        authorizationStatus: `NO_AUTH`,
+        isChecking: false,
+      },
+      REVIEWS: reviews
     });
 
     const tree = renderer.create(
         <Provider store={store}>
           <MemoryRouter initialEntries={[`/`]}>
-            <Screens authorizationStatus={`NO_AUTH`} getPlaces={() => {}} login={() => {}} />
+            <Screens getPlaces={() => {}} login={() => {}} />
           </MemoryRouter>
         </Provider>,
         {
@@ -181,14 +183,15 @@ describe(`Screens snapshots`, () => {
         reviews
       },
       USER: {
-        authorizationStatus: `NO_AUTH`
+        authorizationStatus: `NO_AUTH`,
+        isChecking: false,
       }
     });
 
     const tree = renderer.create(
         <Provider store={store}>
           <MemoryRouter initialEntries={[`/place/7`]}>
-            <Screens authorizationStatus={`NO_AUTH`} getPlaces={() => {}} login={() => {}} />
+            <Screens getPlaces={() => {}} login={() => {}} />
           </MemoryRouter>
         </Provider>,
         {

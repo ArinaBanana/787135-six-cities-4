@@ -1,13 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
-import DetailedInfoScreen from "./detailed-info-screen.jsx";
+import {DetailedInfoScreen} from "./detailed-info-screen.jsx";
 import thunk from "redux-thunk";
 
 const mockApi = {
   get: jest.fn(() => Promise.resolve({
-    data: {}
+    data: []
   })),
 };
 const middlewares = [thunk.withExtraArgument(mockApi)];
@@ -49,7 +50,7 @@ const reviews = [
     username: `Jon`,
     rating: 4,
     message: `message`,
-    date: `date`,
+    date: `2020-08-10T11:39:43.926Z`,
     userAvatar: `path`,
     isPro: true,
   }
@@ -63,20 +64,29 @@ it(`Should render Detailed Info Screen`, () => {
     },
     PLACES: {
       nearPlaces: places,
+    },
+    REVIEWS: {
+      reviews,
+      isLockedForm: false,
+    },
+    USER: {
+      authorizationStatus: `AUTH`
     }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <DetailedInfoScreen
-          placeId={7}
-          place={places[0]}
-          reviews={reviews}
-          nearPlaces={places}
-          setActiveElement={() => {}}
-          getReviews={() => {}}
-          getNearPlaces={() => {}}
-        />
+        <MemoryRouter>
+          <DetailedInfoScreen
+            placeId={7}
+            place={places[0]}
+            reviews={reviews}
+            nearPlaces={places}
+            setActiveElement={() => {}}
+            getReviews={() => {}}
+            getNearPlaces={() => {}}
+          />
+        </MemoryRouter>
       </Provider>,
       {
         createNodeMock: () => {
