@@ -1,4 +1,6 @@
 import {AuthorizationStatus} from "../reducer/user/user";
+import {getUser} from "../selectors/user";
+import history from "../../history/history";
 
 const adaptUser = (user) => {
   return {
@@ -33,15 +35,22 @@ const ActionCreator = {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
+    const state = getState();
+    const user = getUser(state);
+
+    if (user) {
+      return null;
+    }
+
     return api.get(`/login`)
       .then((response) => {
-        const user = adaptUser(response.data);
+        const newUser = adaptUser(response.data);
 
-        dispatch(ActionCreator.setUser(user));
+        dispatch(ActionCreator.setUser(newUser));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        throw err;
+        history.push(`/login`);
       });
   },
 
