@@ -71,7 +71,7 @@ class MainScreen extends PureComponent {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <User isAuth={this.props.isAuth} />
+                  <User />
                 </ul>
               </nav>
             </div>
@@ -98,8 +98,7 @@ MainScreen.propTypes = {
   places: PropTypes.array.isRequired,
   currentLocation: PropTypes.string.isRequired,
   setActiveElement: PropTypes.func.isRequired,
-  activeElement: PropTypes.number.isRequired,
-  isAuth: PropTypes.bool.isRequired
+  activeElement: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({

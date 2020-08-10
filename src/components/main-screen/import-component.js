@@ -1,2 +1,2 @@
-import Component from "./main-screen-with-active-element";
+import Component from "./main-screen-with-hocs";
 export default Component;
