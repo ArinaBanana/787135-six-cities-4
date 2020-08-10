@@ -12,7 +12,7 @@ const reviews = [
     username: `Jon`,
     rating: 70,
     message: `message`,
-    date: `date`,
+    date: `2020-08-10T11:39:43.926Z`,
     userAvatar: `path`,
     isPro: true,
   }
@@ -21,13 +21,20 @@ const reviews = [
 it(`Should render Reviews Container`, () => {
   const store = mockStore({
     REVIEWS: {
-      reviews
+      reviews,
+      isLockedForm: false,
+    },
+    USER: {
+      authorizationStatus: `AUTH`,
     }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <ReviewsContainer reviews={reviews} />
+        <ReviewsContainer
+          placeId={0}
+          reviews={reviews}
+        />
       </Provider>
   ).toJSON();
 

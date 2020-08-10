@@ -8,7 +8,7 @@ const reviews = [
     username: `Jon`,
     rating: 4,
     message: `message`,
-    date: `date`,
+    date: `2020-08-10T11:39:43.926Z`,
     userAvatar: `path`,
     isPro: true,
   }
