@@ -15,6 +15,10 @@ const withCheckAuth = (Component) => {
     }
 
     render() {
+      if (this.props.isChecking) {
+        return null;
+      }
+
       return (
         <Component
           {...this.props}
@@ -24,14 +28,19 @@ const withCheckAuth = (Component) => {
   }
 
   WithCheckAuth.propTypes = {
-    checkAuth: PropTypes.func.isRequired
+    checkAuth: PropTypes.func.isRequired,
+    isChecking: PropTypes.bool.isRequired
   };
+
+  const mapStateToProps = (state) => ({
+    isChecking: state.USER.isChecking
+  });
 
   const mapDispatchToProps = {
     checkAuth: Operation.checkAuth,
   };
 
-  return connect(null, mapDispatchToProps)(WithCheckAuth);
+  return connect(mapStateToProps, mapDispatchToProps)(WithCheckAuth);
 };
 
 export default withCheckAuth;

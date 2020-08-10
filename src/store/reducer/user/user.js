@@ -9,6 +9,7 @@ const AuthorizationStatus = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   user: null,
+  isChecking: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {authorizationStatus: action.payload});
     case ActionType.SET_USER:
       return extend(state, {user: action.payload});
+    case ActionType.IS_CHECKING:
+      return extend(state, {isChecking: action.payload});
   }
 
   return state;

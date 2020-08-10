@@ -15,6 +15,7 @@ const adaptUser = (user) => {
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_USER: `SET_USER`,
+  IS_CHECKING: `IS_CHECKING`
 };
 
 const ActionCreator = {
@@ -29,6 +30,13 @@ const ActionCreator = {
     return {
       type: ActionType.SET_USER,
       payload: user,
+    };
+  },
+
+  isChecking: (isCheck) => {
+    return {
+      type: ActionType.IS_CHECKING,
+      payload: isCheck,
     };
   }
 };
@@ -46,8 +54,12 @@ const Operation = {
       .then((response) => {
         const newUser = adaptUser(response.data);
 
+        dispatch(ActionCreator.isChecking(true));
+
         dispatch(ActionCreator.setUser(newUser));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+
+        dispatch(ActionCreator.isChecking(false));
       })
       .catch(() => {
         dispatch(replace(`/login`));
@@ -62,9 +74,13 @@ const Operation = {
       .then((response) => {
         const newUser = adaptUser(response.data);
 
+        dispatch(ActionCreator.isChecking(true));
+
         dispatch(ActionCreator.setUser(newUser));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(replace(`/`));
+
+        dispatch(ActionCreator.isChecking(false));
       });
   },
 };
