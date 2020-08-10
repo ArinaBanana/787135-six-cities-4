@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
+import {MemoryRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import MainScreen from "./main-screen";
 import thunk from "redux-thunk";
@@ -57,17 +58,23 @@ it(`Should render Main Screen`, () => {
     PLACES: {
       places,
     },
+    USER: {
+      user: {
+        email: `email`,
+      }
+    }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <MainScreen
-          places={places}
-          currentLocation={`Amsterdam`}
-          setActiveElement={() => {}}
-          activeElement={7}
-          isAuth={false}
-        />
+        <MemoryRouter>
+          <MainScreen
+            places={places}
+            currentLocation={`Amsterdam`}
+            setActiveElement={() => {}}
+            activeElement={7}
+          />
+        </MemoryRouter>
       </Provider>,
       {
         createNodeMock: () => {

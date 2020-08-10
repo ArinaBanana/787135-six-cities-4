@@ -1,12 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render User Should render User with false isAuth 1`] = `
+exports[`Should render User Should render User with false isAuth 1`] = `null`;
+
+exports[`Should render User Should render User with true isAuth 1`] = `
 <li
   className="header__nav-item user"
 >
   <a
     className="header__nav-link header__nav-link--profile"
-    href="#"
+    href="/login"
+    onClick={[Function]}
   >
     <div
       className="header__avatar-wrapper user__avatar-wrapper"
@@ -15,26 +18,6 @@ exports[`Should render User Should render User with false isAuth 1`] = `
       className="header__login"
     >
       Sign in
-    </span>
-  </a>
-</li>
-`;
-
-exports[`Should render User Should render User with true isAuth 1`] = `
-<li
-  className="header__nav-item user"
->
-  <a
-    className="header__nav-link header__nav-link--profile"
-    href="#"
-  >
-    <div
-      className="header__avatar-wrapper user__avatar-wrapper"
-    />
-    <span
-      className="header__user-name user__name"
-    >
-      email
     </span>
   </a>
 </li>
