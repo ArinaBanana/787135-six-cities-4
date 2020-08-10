@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 
 import LinkUser from "../link-user/link-user.jsx";
 import LinkSignIn from "../link-sign-in/link-sign-in.jsx";
+import {isAuthorized} from "../../store/selectors/user";
 
 function User({user, isAuth}) {
   if (!user) {
@@ -27,6 +28,7 @@ User.propTypes = {
 const mapStateToProps = (state) => {
   return {
     user: state.USER.user,
+    isAuth: isAuthorized(state),
   };
 };
 

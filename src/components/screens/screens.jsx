@@ -16,14 +16,6 @@ import {getAuthorizationStatus} from "../../store/selectors/user";
 class Screens extends PureComponent {
   constructor(props) {
     super(props);
-
-    this._isAuthorized = this._isAuthorized.bind(this);
-  }
-
-  _isAuthorized() {
-    const {authorizationStatus} = this.props;
-
-    return authorizationStatus === `AUTH`;
   }
 
   componentDidMount() {
@@ -33,12 +25,11 @@ class Screens extends PureComponent {
 
   render() {
     const {login} = this.props;
-    const isAuth = this._isAuthorized();
 
     return (
       <Switch>
         <Route exact path="/">
-          <MainScreen isAuth={isAuth}/>
+          <MainScreen />
         </Route>
         <Route exact path={`${PLACE}:id`} render={(props) => {
           const placeId = Number(props.match.params.id);
