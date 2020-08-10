@@ -6,8 +6,10 @@ import {connect} from "react-redux";
 import ReviewsContainer from "../reviews-container/reviews-container.jsx";
 import Map from "../map/map.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import User from "../user/user.jsx";
 import PlaceGallery from "../place-gallery/place-gallery.jsx";
 import PlaceInsideList from "../place-inside-list/place-inside-list.jsx";
+
 import {getFloatNumberInPercent, splitString} from "../../utils/func";
 import getPlacesWithIconForMap from "../../utils/places";
 
@@ -68,13 +70,7 @@ class DetailedInfoScreen extends PureComponent {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
+                  <User />
                 </ul>
               </nav>
             </div>
