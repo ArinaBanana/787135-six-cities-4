@@ -1,4 +1,4 @@
-import {parseDate} from "../../utils/func";
+import parseIso from "date-fns/parseISO";
 
 const adaptReviews = (reviews) => {
   return reviews
@@ -8,12 +8,13 @@ const adaptReviews = (reviews) => {
         username: review.user.name,
         rating: review.rating,
         message: review.comment,
-        date: parseDate(review.date),
+        date: review.date,
         userAvatar: review.user[`avatar_url`],
         isPro: review.user[`is_pro`],
         userId: review.user.id
       };
-    });
+    })
+    .sort((a, b) => parseIso(b.date) - parseIso(a.date));
 };
 
 const ActionType = {

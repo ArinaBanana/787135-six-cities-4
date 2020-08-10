@@ -7,11 +7,12 @@ import {isAuthorized} from "../../store/selectors/user";
 
 function ReviewsContainer(props) {
   const {reviews, isAuth, placeId} = props;
+  const maxReviews = reviews.slice(0, 10);
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-      <ReviewList reviews={reviews}/>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{maxReviews.length}</span></h2>
+      <ReviewList reviews={maxReviews}/>
       {isAuth && <ReviewForm placeId={placeId}/>}
     </section>
   );
