@@ -49,7 +49,7 @@ const Operation = {
         dispatch(ActionCreator.setUser(newUser));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(replace(`/login`));
       });
   },
@@ -59,8 +59,12 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
+      .then((response) => {
+        const newUser = adaptUser(response.data);
+
+        dispatch(ActionCreator.setUser(newUser));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(replace(`/`));
       });
   },
 };

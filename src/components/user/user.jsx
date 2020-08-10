@@ -21,7 +21,7 @@ function User({user, isAuth}) {
 }
 
 User.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   isAuth: PropTypes.bool.isRequired
 };
 
