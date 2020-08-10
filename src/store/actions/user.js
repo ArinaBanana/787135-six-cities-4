@@ -1,6 +1,6 @@
 import {AuthorizationStatus} from "../reducer/user/user";
 import {getUser} from "../selectors/user";
-import history from "../../history/history";
+import {replace} from 'connected-react-router';
 
 const adaptUser = (user) => {
   return {
@@ -50,7 +50,7 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {
-        history.push(`/login`);
+        dispatch(replace(`/login`));
       });
   },
 
