@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import ReviewList from "../review-list/review-list.jsx";
-import ReviewForm from "../review-form/review-form.jsx";
+import ReviewForm from "../review-form/import-component";
 import {isAuthorized} from "../../store/selectors/user";
 
 function ReviewsContainer(props) {
