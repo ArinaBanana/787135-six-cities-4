@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {MemoryRouter} from "react-router-dom";
 
-import PlaceCard from "./place-card";
+import {PlaceCard} from "./place-card";
 
 const place = {
   id: 7,
@@ -18,7 +18,7 @@ const place = {
 it(`Should render Place Card`, () => {
   const tree = renderer.create(
       <MemoryRouter>
-        <PlaceCard place={place} onMouseMove={() => {}} />
+        <PlaceCard isFavoritePlace={false} setFavoritePlace={() => {}} place={place} onMouseMove={() => {}} />
       </MemoryRouter>
   ).toJSON();
 
