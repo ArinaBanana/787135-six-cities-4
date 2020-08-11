@@ -32,7 +32,7 @@ class FavoriteScreen extends React.Component {
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
-                  <User/>
+                  <User />
                 </ul>
               </nav>
             </div>
@@ -44,7 +44,13 @@ class FavoriteScreen extends React.Component {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                <FavoriteItem />
+
+                {
+                  favoritePlaces.map((place) => <FavoriteItem
+                    key={place.id}
+                    favoritePlace={place} />)
+                }
+
               </ul>
             </section>
           </div>

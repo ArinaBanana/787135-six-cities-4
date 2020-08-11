@@ -27,7 +27,11 @@ function PlacesContainer(props) {
           </ul>
         </form>
 
-        <PlacesList places={places} isNearList={false} setActiveElement={setActiveElement}/>
+        <PlacesList
+          places={places}
+          isNearList={false}
+          isFavoritePlace={false}
+          setActiveElement={setActiveElement}/>
 
       </section>
       <div className="cities__right-section">
