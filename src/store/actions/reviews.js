@@ -1,5 +1,5 @@
 import parseIso from "date-fns/parseISO";
-import StatusCodes from "../../utils/status-codes";
+import {StatusCodes} from "../../utils/status";
 
 const adaptReviews = (reviews) => {
   return reviews

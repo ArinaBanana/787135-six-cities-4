@@ -2,15 +2,19 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {Operation} from "../../store/actions/places";
 
 import {getUrlByPlace} from "../../utils/url";
 import {getFloatNumberInPercent} from "../../utils/func";
+import {StatusUpdate} from "../../utils/status";
 
 class PlaceCard extends PureComponent {
   constructor(props) {
     super(props);
 
     this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleClickButtonBookmark = this.handleClickButtonBookmark.bind(this);
   }
 
   handleMouseMove() {
@@ -19,30 +23,46 @@ class PlaceCard extends PureComponent {
     return onMouseMove(place.id);
   }
 
+  handleClickButtonBookmark() {
+    const {place, setFavoritePlace} = this.props;
+
+    if (place.isBookmark) {
+      setFavoritePlace(place.id, StatusUpdate.DELETE);
+    } else {
+      setFavoritePlace(place.id, StatusUpdate.ADD);
+    }
+  }
+
   render() {
-    const {place} = this.props;
+    const {place, isFavoritePlace} = this.props;
 
     const rating = getFloatNumberInPercent(place.rating);
 
     return (
-      <article className="cities__place-card place-card" onMouseMove={this.handleMouseMove}>
+      <article className={cn(`cities__place-card place-card`, {"favorites__card": isFavoritePlace})} onMouseMove={this.handleMouseMove}>
 
         {
           place.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ``
         }
 
-        <div className="cities__image-wrapper place-card__image-wrapper">
+        <div className={cn(`place-card__image-wrapper`, {"favorites__image-wrapper": isFavoritePlace}, {"cities__image-wrapper": !isFavoritePlace})}>
           <a href="#">
             <img className="place-card__image" src={place.img} width="260" height="200" alt="Place image"/>
           </a>
         </div>
-        <div className="place-card__info">
+
+        <div className={cn(`place-card__info`, {"favorites__card-info": isFavoritePlace})}>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{place.price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className={cn(`place-card__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})} type="button">
+
+            <button
+              onClick={this.handleClickButtonBookmark}
+              className={cn(`place-card__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})}
+              type="button"
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark" />
               </svg>
@@ -67,6 +87,7 @@ class PlaceCard extends PureComponent {
 
 PlaceCard.propTypes = {
   onMouseMove: PropTypes.func.isRequired,
+  setFavoritePlace: PropTypes.func.isRequired,
   place: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -76,7 +97,13 @@ PlaceCard.propTypes = {
     rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmark: PropTypes.bool.isRequired,
-  })
+  }),
+  isFavoritePlace: PropTypes.bool.isRequired
 };
 
-export default PlaceCard;
+const mapDispatchToProps = {
+  setFavoritePlace: Operation.postFavoritePlace
+};
+
+export {PlaceCard};
+export default connect(null, mapDispatchToProps)(PlaceCard);

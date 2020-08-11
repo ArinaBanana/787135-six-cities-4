@@ -24,4 +24,17 @@ describe(`Checks reducer reviews`, () => {
 
     expect(callReducer).toEqual(result);
   });
+
+  it(`Reducer should check the locked form`, () => {
+    const isLockedForm = true;
+
+    const callReducer = reducer(initialState, {
+      type: ActionType.IS_LOCKED_FORM,
+      payload: isLockedForm,
+    });
+
+    const result = Object.assign({}, initialState, {isLockedForm});
+
+    expect(callReducer).toEqual(result);
+  });
 });

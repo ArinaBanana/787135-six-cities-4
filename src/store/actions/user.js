@@ -1,6 +1,6 @@
 import {AuthorizationStatus} from "../reducer/user/user";
 import {getUser} from "../selectors/user";
-import {replace} from 'connected-react-router';
+import {replace} from "connected-react-router";
 
 const adaptUser = (user) => {
   return {
@@ -42,7 +42,7 @@ const ActionCreator = {
 };
 
 const Operation = {
-  checkAuth: () => (dispatch, getState, api) => {
+  checkAuth: (required) => (dispatch, getState, api) => {
     const state = getState();
     const user = getUser(state);
 
@@ -62,7 +62,10 @@ const Operation = {
         dispatch(ActionCreator.isChecking(false));
       })
       .catch(() => {
-        dispatch(replace(`/login`));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+        if (required) {
+          dispatch(replace(`/login`));
+        }
       });
   },
 

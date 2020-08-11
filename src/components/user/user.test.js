@@ -19,7 +19,9 @@ describe(`Should render User`, () => {
 
     const tree = renderer.create(
         <Provider store={store}>
-          <User isAuth={false} />
+          <MemoryRouter>
+            <User isAuth={false} />
+          </MemoryRouter>
         </Provider>
     ).toJSON();
 

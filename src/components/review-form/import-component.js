@@ -1,2 +1,2 @@
-import Component from "./review-form-with-check-disabled-button";
+import Component from "./review-form-with-hocs";
 export default Component;

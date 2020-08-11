@@ -4,4 +4,4 @@ import DetailedInfoScreen from "./detailed-info-screen.jsx";
 
 const wrapped = withActiveElement(DetailedInfoScreen);
 
-export default withCheckAuth(wrapped);
+export default withCheckAuth()(wrapped);

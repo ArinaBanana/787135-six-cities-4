@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import LocationList from "../location-list/location-list.jsx";
-import PlacesContainer from "../places-container/places-container.jsx";
+import PlacesContainer from "../places-container/import-component";
 import NoPlacesInCity from "../no-places-in-city/no-places-in-city.jsx";
 import User from "../user/user.jsx";
 

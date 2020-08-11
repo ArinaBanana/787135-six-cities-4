@@ -7,10 +7,6 @@ import LinkSignIn from "../link-sign-in/link-sign-in.jsx";
 import {isAuthorized} from "../../store/selectors/user";
 
 function User({user, isAuth}) {
-  if (!user) {
-    return null;
-  }
-
   return (
     <li className="header__nav-item user">
       {

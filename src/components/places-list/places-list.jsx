@@ -20,6 +20,7 @@ class PlacesList extends PureComponent {
             key={place.id}
             place={place}
             onMouseMove={this.throttledHandleMouseMove}
+            isFavoritePlace={false}
           />)
         }
       </div>

@@ -2,6 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {MemoryRouter} from "react-router-dom";
 import PlacesList from "./places-list";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
 const places = [
   {
@@ -27,10 +32,14 @@ const places = [
 ];
 
 it(`Should render Places List`, () => {
+  const store = mockStore({});
+
   const tree = renderer.create(
-      <MemoryRouter>
-        <PlacesList places={places} isNearList={false} setActiveElement={() => {}} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <PlacesList places={places} isNearList={false} setActiveElement={() => {}} />
+        </MemoryRouter>
+      </Provider>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

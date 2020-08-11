@@ -1,7 +1,12 @@
 import React, {PureComponent, createRef} from "react";
+import {compose} from 'redux';
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
+import {replace} from 'connected-react-router';
+import {connect} from "react-redux";
 import {getUrlByMainRoute} from "../../utils/url";
+import {isAuthorized} from "../../store/selectors/user";
+import withCheckAuth from "../../hocs/with-check-auth/with-check-auth";
 
 class AuthScreen extends PureComponent {
   constructor(props) {
@@ -11,6 +16,12 @@ class AuthScreen extends PureComponent {
     this.passwordRef = createRef();
 
     this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.isAuth) {
+      this.props.replace(`/`);
+    }
   }
 
   _handleSubmit(evt) {
@@ -98,6 +109,21 @@ class AuthScreen extends PureComponent {
 
 AuthScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  replace: PropTypes.func.isRequired
 };
 
-export default AuthScreen;
+const mapStateToProps = (state) => ({
+  isAuth: isAuthorized(state),
+});
+
+const mapDispatchToProps = {
+  replace
+};
+
+export {AuthScreen};
+export default compose(
+    withCheckAuth(),
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(AuthScreen);

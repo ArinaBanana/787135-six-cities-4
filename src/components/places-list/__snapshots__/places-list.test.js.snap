@@ -10,7 +10,7 @@ exports[`Should render Places List 1`] = `
   >
     
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="place-card__image-wrapper cities__image-wrapper"
     >
       <a
         href="#"
@@ -47,6 +47,7 @@ exports[`Should render Places List 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -114,7 +115,7 @@ exports[`Should render Places List 1`] = `
       </span>
     </div>
     <div
-      className="cities__image-wrapper place-card__image-wrapper"
+      className="place-card__image-wrapper cities__image-wrapper"
     >
       <a
         href="#"
@@ -151,6 +152,7 @@ exports[`Should render Places List 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button place-card__bookmark-button--active"
+          onClick={[Function]}
           type="button"
         >
           <svg

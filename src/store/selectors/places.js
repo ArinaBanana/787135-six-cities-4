@@ -27,4 +27,23 @@ const getPlacesByCurrentLocation = createSelector(
     }
 );
 
-export {getActivePlace, getPlacesByCurrentLocation};
+const getFavoritePlaces = (state) => state.PLACES.favoritePlaces;
+const getSortedByCityFavoritePlaces = createSelector(
+    getFavoritePlaces,
+    (places) => {
+      const result = places.slice();
+
+      return result.sort((a, b) => {
+        if (a.city.name > b.city.name) {
+          return 1;
+        }
+        if (a.city.name < b.city.name) {
+          return -1;
+        }
+
+        return 0;
+      });
+    }
+);
+
+export {getActivePlace, getPlacesByCurrentLocation, getSortedByCityFavoritePlaces};

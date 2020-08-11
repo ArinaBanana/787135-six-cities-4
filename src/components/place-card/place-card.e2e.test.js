@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import PlaceCard from "./place-card";
+import {PlaceCard} from "./place-card";
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -22,6 +22,8 @@ describe(`PlaceCard component`, () => {
   const onMouseMove = jest.fn();
   const component = shallow(
       <PlaceCard
+        isFavoritePlace={false}
+        setFavoritePlace={() => {}}
         place={place}
         onMouseMove={onMouseMove}
       />
