@@ -11,11 +11,11 @@ const withCurrentSortType = (Component) => {
         type: `popular`
       };
 
-      this.setSortType = this.setSortType.bind(this);
+      this.changeSortType = this.changeSortType.bind(this);
       this.getSortedPlaces = this.getSortedPlaces.bind(this);
     }
 
-    setSortType(sortType) {
+    changeSortType(sortType) {
       const {type} = this.state;
 
       if (type === sortType) {
@@ -40,7 +40,7 @@ const withCurrentSortType = (Component) => {
         <Component
           {...this.props}
           sortType={type}
-          changeSortType={this.setSortType}
+          changeSortType={this.changeSortType}
           places={this.getSortedPlaces()}
         />
       );

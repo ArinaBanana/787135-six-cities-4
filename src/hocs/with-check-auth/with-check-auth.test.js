@@ -15,8 +15,8 @@ function MockComponent() {
 
 it(`Check that HOC's the callback is being made`, () => {
   const checkAuth = jest.fn();
+  const MockComponentWrapped = withCheckAuth(true)(MockComponent);
 
-  const MockComponentWrapped = withCheckAuth(MockComponent);
   MockComponentWrapped.prototype.componentDidMount.call({
     props: {
       checkAuth
