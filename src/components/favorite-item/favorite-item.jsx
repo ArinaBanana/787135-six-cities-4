@@ -7,7 +7,7 @@ function FavoriteItem({favoritePlace}) {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <a className="locations__item-link">
             <span>{favoritePlace.city.name}</span>
           </a>
         </div>

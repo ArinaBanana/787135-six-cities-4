@@ -6,6 +6,7 @@ import User from "../user/user.jsx";
 import {Operation} from "../../store/actions/places";
 import FavoriteIsEmpty from "../favorite-is-empty/favorite-is-empty.jsx";
 import FavoriteItem from "../favorite-item/favorite-item.jsx";
+import {getSortedByCityFavoritePlaces} from "../../store/selectors/places";
 
 class FavoriteScreen extends React.Component {
   componentDidMount() {
@@ -71,7 +72,7 @@ FavoriteScreen.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  favoritePlaces: state.PLACES.favoritePlaces
+  favoritePlaces: getSortedByCityFavoritePlaces(state),
 });
 
 const mapDispatchToProps = {
