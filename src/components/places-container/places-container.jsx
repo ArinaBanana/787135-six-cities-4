@@ -26,7 +26,6 @@ class PlacesContainer extends PureComponent {
           <b className="places__found">{places.length} places to stay in {currentLocation}</b>
 
           <Sorting
-            isHidden={true}
             onChangeSortType={this.changeSort}
           />
 
