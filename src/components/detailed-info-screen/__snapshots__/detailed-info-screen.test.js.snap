@@ -18,6 +18,8 @@ exports[`Should render Detailed Info Screen 1`] = `
         >
           <a
             className="header__logo-link"
+            href="/"
+            onClick={[Function]}
           >
             <img
               alt="6 cities logo"
@@ -33,7 +35,26 @@ exports[`Should render Detailed Info Screen 1`] = `
         >
           <ul
             className="header__nav-list"
-          />
+          >
+            <li
+              className="header__nav-item user"
+            >
+              <a
+                className="header__nav-link header__nav-link--profile"
+                href="/favorites"
+                onClick={[Function]}
+              >
+                <div
+                  className="header__avatar-wrapper user__avatar-wrapper"
+                />
+                <span
+                  className="header__user-name user__name"
+                >
+                  email
+                </span>
+              </a>
+            </li>
+          </ul>
         </nav>
       </div>
     </div>
@@ -525,7 +546,7 @@ exports[`Should render Detailed Info Screen 1`] = `
           >
             
             <div
-              className="cities__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper cities__image-wrapper"
             >
               <a
                 href="#"
@@ -562,6 +583,7 @@ exports[`Should render Detailed Info Screen 1`] = `
                 </div>
                 <button
                   className="place-card__bookmark-button button place-card__bookmark-button--active"
+                  onClick={[Function]}
                   type="button"
                 >
                   <svg

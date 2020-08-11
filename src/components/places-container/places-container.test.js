@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {MemoryRouter} from "react-router-dom";
 import PlacesContainer from "./places-container.jsx";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
 const places = [
   {
@@ -49,18 +51,25 @@ const markers = [
   }
 ];
 
+const mockStore = configureStore([]);
+
 it(`Should render Places container`, () => {
+  const store = mockStore({});
+
   const tree = renderer.create(
-      <MemoryRouter>
-        <PlacesContainer
-          places={places}
-          currentLocation={`Amsterdam`}
-          setActiveElement={() => {}}
-          city={[52.38333, 4.9]}
-          zoom={10}
-          markers={markers}
-        />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <PlacesContainer
+            places={places}
+            currentLocation={`Amsterdam`}
+            setActiveElement={() => {}}
+            city={[52.38333, 4.9]}
+            zoom={10}
+            markers={markers}
+            changeSortType={() => {}}
+          />
+        </MemoryRouter>
+      </Provider>,
       {
         createNodeMock: () => {
           return document.createElement(`div`);

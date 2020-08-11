@@ -70,7 +70,10 @@ it(`Should render Detailed Info Screen`, () => {
       isLockedForm: false,
     },
     USER: {
-      authorizationStatus: `AUTH`
+      authorizationStatus: `AUTH`,
+      user: {
+        email: `email`
+      }
     }
   });
 
