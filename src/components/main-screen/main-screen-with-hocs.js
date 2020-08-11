@@ -4,4 +4,4 @@ import MainScreen from "./main-screen.jsx";
 
 const wrapped = withActiveElement(MainScreen);
 
-export default withCheckAuth(wrapped);
+export default withCheckAuth()(wrapped);

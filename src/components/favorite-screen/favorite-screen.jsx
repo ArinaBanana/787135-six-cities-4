@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
@@ -8,7 +8,7 @@ import FavoriteIsEmpty from "../favorite-is-empty/favorite-is-empty.jsx";
 import FavoriteItem from "../favorite-item/favorite-item.jsx";
 import {getSortedByCityFavoritePlaces} from "../../store/selectors/places";
 
-class FavoriteScreen extends React.Component {
+class FavoriteScreen extends PureComponent {
   componentDidMount() {
     const {getFavoritePlaces} = this.props;
     getFavoritePlaces();

@@ -31,7 +31,9 @@ const getFavoritePlaces = (state) => state.PLACES.favoritePlaces;
 const getSortedByCityFavoritePlaces = createSelector(
     getFavoritePlaces,
     (places) => {
-      return places.sort((a, b) => {
+      const result = places.slice();
+
+      return result.sort((a, b) => {
         if (a.city.name > b.city.name) {
           return 1;
         }

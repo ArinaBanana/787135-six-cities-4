@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operation} from "../../store/actions/user";
 
-const withCheckAuth = (Component) => {
+const withCheckAuth = (required = false) => (Component) => {
   class WithCheckAuth extends PureComponent {
     constructor(props) {
       super(props);
@@ -11,7 +11,7 @@ const withCheckAuth = (Component) => {
 
     componentDidMount() {
       const {checkAuth} = this.props;
-      checkAuth();
+      checkAuth(required);
     }
 
     render() {
