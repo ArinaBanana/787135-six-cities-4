@@ -27,8 +27,8 @@ function throttle(func, ms) {
   return wrapper;
 }
 
-function extend(a, b, c = {}) {
-  return Object.assign({}, a, b, c);
+function extend(a, b, c = {}, d = {}) {
+  return Object.assign({}, a, b, c, d);
 }
 
 function getFloatNumberInPercent(a, b = 5) {

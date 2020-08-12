@@ -16,16 +16,23 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FAVORITE_PLACES:
       return extend(state, {favoritePlaces: action.payload});
     case ActionType.UPDATE_PLACE:
-      const result = state.places.map((place) => {
+      const places = state.places.map((place) => {
         if (place.id === action.payload.id) {
           return action.payload;
         }
         return place;
       });
 
-      const favorites = result.filter((place) => place.isBookmark === true);
+      const nearby = state.nearPlaces.map((place) => {
+        if (place.id === action.payload.id) {
+          return action.payload;
+        }
+        return place;
+      });
 
-      return extend(state, {places: result}, {favoritePlaces: favorites});
+      const favorites = places.filter((place) => place.isBookmark === true);
+
+      return extend(state, {places}, {favoritePlaces: favorites}, {nearPlaces: nearby});
   }
 
   return state;
