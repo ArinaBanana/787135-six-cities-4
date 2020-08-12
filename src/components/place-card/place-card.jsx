@@ -24,12 +24,12 @@ class PlaceCard extends PureComponent {
   }
 
   handleClickButtonBookmark() {
-    const {place, setFavoritePlace} = this.props;
+    const {place, onSetFavoritePlace} = this.props;
 
     if (place.isBookmark) {
-      setFavoritePlace(place.id, StatusUpdate.DELETE);
+      onSetFavoritePlace(place.id, StatusUpdate.DELETE);
     } else {
-      setFavoritePlace(place.id, StatusUpdate.ADD);
+      onSetFavoritePlace(place.id, StatusUpdate.ADD);
     }
   }
 
@@ -87,7 +87,7 @@ class PlaceCard extends PureComponent {
 
 PlaceCard.propTypes = {
   onMouseMove: PropTypes.func.isRequired,
-  setFavoritePlace: PropTypes.func.isRequired,
+  onSetFavoritePlace: PropTypes.func.isRequired,
   place: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -102,7 +102,7 @@ PlaceCard.propTypes = {
 };
 
 const mapDispatchToProps = {
-  setFavoritePlace: Operation.postFavoritePlace
+  onSetFavoritePlace: Operation.postFavoritePlace
 };
 
 export {PlaceCard};

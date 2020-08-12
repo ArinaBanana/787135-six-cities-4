@@ -45,7 +45,7 @@ class MainScreen extends PureComponent {
   }
 
   _renderScreen() {
-    const {places, currentLocation, setActiveElement} = this.props;
+    const {places, currentLocation, onSetActiveElement} = this.props;
     const {zoom, city} = this._getZoomAndCity();
     const markers = this._getMarkers();
 
@@ -53,7 +53,7 @@ class MainScreen extends PureComponent {
       places={places}
       markers={markers}
       currentLocation={currentLocation}
-      setActiveElement={setActiveElement}
+      setActiveElement={onSetActiveElement}
       zoom={zoom}
       city={city}/>;
   }
@@ -97,7 +97,7 @@ class MainScreen extends PureComponent {
 MainScreen.propTypes = {
   places: PropTypes.array.isRequired,
   currentLocation: PropTypes.string.isRequired,
-  setActiveElement: PropTypes.func.isRequired,
+  onSetActiveElement: PropTypes.func.isRequired,
   activeElement: PropTypes.number.isRequired
 };
 

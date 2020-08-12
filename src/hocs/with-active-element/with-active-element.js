@@ -30,7 +30,7 @@ const withActiveElement = (Component) => {
       return (
         <Component
           {...this.props}
-          setActiveElement={this.setActiveElement}
+          onSetActiveElement={this.setActiveElement}
           activeElement={activeElement}
         />
       );

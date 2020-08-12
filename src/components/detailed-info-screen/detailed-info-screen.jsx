@@ -49,7 +49,7 @@ class DetailedInfoScreen extends PureComponent {
   }
 
   render() {
-    const {place, nearPlaces, setActiveElement} = this.props;
+    const {place, nearPlaces, onSetActiveElement} = this.props;
 
     if (!place) {
       return null;
@@ -159,7 +159,7 @@ class DetailedInfoScreen extends PureComponent {
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <PlacesList places={nearPlaces} isNearList={true} setActiveElement={setActiveElement} />
+              <PlacesList places={nearPlaces} isNearList={true} setActiveElement={onSetActiveElement} />
             </section>
           </div>
         </main>
@@ -191,7 +191,7 @@ DetailedInfoScreen.propTypes = {
     description: PropTypes.string.isRequired
   }),
   nearPlaces: PropTypes.array.isRequired,
-  setActiveElement: PropTypes.func.isRequired,
+  onSetActiveElement: PropTypes.func.isRequired,
   getReviews: PropTypes.func.isRequired,
   getNearPlaces: PropTypes.func.isRequired
 };
