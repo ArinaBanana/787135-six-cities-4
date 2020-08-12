@@ -12,6 +12,19 @@ class Map extends PureComponent {
     this._renderMarker = this._renderMarker.bind(this);
   }
 
+  componentDidMount() {
+    this._configureLeafletMap();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.city && prevProps.zoom !== this.props.city && this.props.zoom) {
+      this._map.setView(this.props.city, this.props.zoom);
+      this._layers.forEach((layer) => layer.remove());
+
+      this._renderMarkers();
+    }
+  }
+
   _configureLeafletMap() {
     this._createMap();
     this._addTileLayer();
@@ -74,19 +87,6 @@ class Map extends PureComponent {
     const coordinates = this._getCoordinates();
     const bounds = leaflet.latLngBounds(coordinates);
     this._map.fitBounds(bounds, fitBoundsOptions);
-  }
-
-  componentDidMount() {
-    this._configureLeafletMap();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.city && prevProps.zoom !== this.props.city && this.props.zoom) {
-      this._map.setView(this.props.city, this.props.zoom);
-      this._layers.forEach((layer) => layer.remove());
-
-      this._renderMarkers();
-    }
   }
 
   render() {

@@ -25,14 +25,6 @@ class DetailedInfoScreen extends PureComponent {
     this._getPlaces = this._getPlaces.bind(this);
   }
 
-  _getPlaces() {
-    const {place, nearPlaces, placeId} = this.props;
-    const places = nearPlaces.slice();
-    places.push(place);
-
-    return getPlacesWithIconForMap(places, placeId);
-  }
-
   componentDidMount() {
     const {getReviews, getNearPlaces, placeId} = this.props;
     getReviews(placeId);
@@ -46,6 +38,14 @@ class DetailedInfoScreen extends PureComponent {
       getReviews(placeId);
       getNearPlaces(placeId);
     }
+  }
+
+  _getPlaces() {
+    const {place, nearPlaces, placeId} = this.props;
+    const places = nearPlaces.slice();
+    places.push(place);
+
+    return getPlacesWithIconForMap(places, placeId);
   }
 
   render() {
