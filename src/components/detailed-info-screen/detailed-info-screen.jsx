@@ -17,12 +17,14 @@ import getPlacesWithIconForMap from "../../utils/places";
 import {getActivePlace} from "../../store/selectors/places";
 import {Operation as ReviewsOperation} from "../../store/actions/reviews";
 import {Operation as PlacesOperation} from "../../store/actions/places";
+import {StatusUpdate} from "../../utils/status";
 
 class DetailedInfoScreen extends PureComponent {
   constructor(props) {
     super(props);
 
     this._getPlaces = this._getPlaces.bind(this);
+    this._handleClickButtonBookmark = this._handleClickButtonBookmark.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +48,16 @@ class DetailedInfoScreen extends PureComponent {
     places.push(place);
 
     return getPlacesWithIconForMap(places, placeId);
+  }
+
+  _handleClickButtonBookmark() {
+    const {place, placeId, onSetFavoritePlace} = this.props;
+
+    if (place.isBookmark) {
+      onSetFavoritePlace(placeId, StatusUpdate.DELETE);
+    } else {
+      onSetFavoritePlace(placeId, StatusUpdate.ADD);
+    }
   }
 
   render() {
@@ -94,7 +106,7 @@ class DetailedInfoScreen extends PureComponent {
                   <h1 className="property__name">
                     {place.title}
                   </h1>
-                  <button className={cn(`property__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})} type="button">
+                  <button onClick={this._handleClickButtonBookmark} className={cn(`property__bookmark-button button`, {"place-card__bookmark-button--active": place.isBookmark})} type="button">
                     <svg className={cn(`property__bookmark-icon`, {"place-card__bookmark-icon": place.isBookmark})} width="31" height="33">
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -192,6 +204,7 @@ DetailedInfoScreen.propTypes = {
   }),
   nearPlaces: PropTypes.array.isRequired,
   onSetActiveElement: PropTypes.func.isRequired,
+  onSetFavoritePlace: PropTypes.func.isRequired,
   getReviews: PropTypes.func.isRequired,
   getNearPlaces: PropTypes.func.isRequired
 };
@@ -207,7 +220,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   getReviews: ReviewsOperation.loadReviews,
-  getNearPlaces: PlacesOperation.loadNearPlaces
+  getNearPlaces: PlacesOperation.loadNearPlaces,
+  onSetFavoritePlace: PlacesOperation.postFavoritePlace
 };
 
 export {DetailedInfoScreen};
