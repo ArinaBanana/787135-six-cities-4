@@ -1,34 +1,28 @@
-import React, {Component} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/actions/location";
 
 import Location from "../location/location.jsx";
 
-class LocationList extends Component {
-  constructor(props) {
-    super(props);
-  }
+function LocationList(props) {
+  const {locations, currentLocation, onTitleClick} = props;
 
-  render() {
-    const {locations, currentLocation, onTitleClick} = this.props;
+  return (
+    <ul className="locations__list tabs__list">
+      {
+        locations.map((location, index) => {
+          const isActive = location === currentLocation;
 
-    return (
-      <ul className="locations__list tabs__list">
-        {
-          locations.map((location, index) => {
-            const isActive = location === currentLocation;
-
-            return <Location
-              key={`${index}-${location}`}
-              city={location}
-              isActive={isActive}
-              onTitleClick={onTitleClick} />;
-          })
-        }
-      </ul>
-    );
-  }
+          return <Location
+            key={`${index}-${location}`}
+            city={location}
+            isActive={isActive}
+            onTitleClick={onTitleClick}/>;
+        })
+      }
+    </ul>
+  );
 }
 
 const mapStateToProps = (state) => ({
