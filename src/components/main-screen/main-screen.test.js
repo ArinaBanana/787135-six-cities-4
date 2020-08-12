@@ -71,7 +71,7 @@ it(`Should render Main Screen`, () => {
           <MainScreen
             places={places}
             currentLocation={`Amsterdam`}
-            setActiveElement={() => {}}
+            onSetActiveElement={() => {}}
             activeElement={7}
           />
         </MemoryRouter>

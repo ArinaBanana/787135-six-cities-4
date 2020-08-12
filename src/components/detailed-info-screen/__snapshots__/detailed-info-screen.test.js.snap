@@ -108,6 +108,7 @@ exports[`Should render Detailed Info Screen 1`] = `
             </h1>
             <button
               className="property__bookmark-button button place-card__bookmark-button--active"
+              onClick={[Function]}
               type="button"
             >
               <svg

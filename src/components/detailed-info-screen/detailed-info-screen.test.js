@@ -85,9 +85,10 @@ it(`Should render Detailed Info Screen`, () => {
             place={places[0]}
             reviews={reviews}
             nearPlaces={places}
-            setActiveElement={() => {}}
             getReviews={() => {}}
             getNearPlaces={() => {}}
+            onSetFavoritePlace={() => {}}
+            onSetActiveElement={() => {}}
           />
         </MemoryRouter>
       </Provider>,

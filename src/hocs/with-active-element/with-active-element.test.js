@@ -7,17 +7,17 @@ import withActiveElement from "./with-active-element";
 configure({adapter: new Adapter()});
 
 const MockComponent = (props) => {
-  const {setActiveElement} = props;
+  const {onSetActiveElement} = props;
 
   return (
     <ul>
-      <li onClick={setActiveElement} />
+      <li onClick={onSetActiveElement} />
     </ul>
   );
 };
 
 MockComponent.propTypes = {
-  setActiveElement: PropTypes.func.isRequired
+  onSetActiveElement: PropTypes.func.isRequired
 };
 
 it(`Checks that HOC's the callback sets the active element`, () => {

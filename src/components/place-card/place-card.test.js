@@ -18,7 +18,7 @@ const place = {
 it(`Should render Place Card`, () => {
   const tree = renderer.create(
       <MemoryRouter>
-        <PlaceCard isFavoritePlace={false} setFavoritePlace={() => {}} place={place} onMouseMove={() => {}} />
+        <PlaceCard isFavoritePlace={false} onSetFavoritePlace={() => {}} place={place} onMouseMove={() => {}} />
       </MemoryRouter>
   ).toJSON();
 

@@ -126,6 +126,22 @@ describe(`Checks reducer places`, () => {
           }
         }
       ],
+      nearPlaces: [{
+        id: 9,
+        title: `Foo`,
+        price: 80,
+        img: `path`,
+        type: `room`,
+        rating: `80%`,
+        isPremium: true,
+        isBookmark: true,
+        coordinates: [52.3809553943508, 4.939309666406198],
+        city: {
+          name: `City`,
+          coordinates: [52.38333, 4.9],
+          zoom: 12
+        }
+      }],
       favoritePlaces: [],
     };
 
@@ -147,6 +163,7 @@ describe(`Checks reducer places`, () => {
     };
 
     const places = state.places;
+    const nearby = state.nearPlaces;
     const favorites = [
       {
         id: 9,
@@ -171,8 +188,7 @@ describe(`Checks reducer places`, () => {
       payload: place,
     });
 
-    const result = Object.assign({}, state, {places}, {favoritePlaces: favorites});
-
+    const result = Object.assign({}, state, {places}, {favoritePlaces: favorites}, {nearPlaces: nearby});
 
     expect(callReducer).toEqual(result);
   });

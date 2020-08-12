@@ -23,7 +23,7 @@ describe(`PlaceCard component`, () => {
   const component = shallow(
       <PlaceCard
         isFavoritePlace={false}
-        setFavoritePlace={() => {}}
+        onSetFavoritePlace={() => {}}
         place={place}
         onMouseMove={onMouseMove}
       />

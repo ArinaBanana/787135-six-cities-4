@@ -108,6 +108,7 @@ exports[`Screens snapshots Should render detail info screen 1`] = `
             </h1>
             <button
               className="property__bookmark-button button place-card__bookmark-button--active"
+              onClick={[Function]}
               type="button"
             >
               <svg
